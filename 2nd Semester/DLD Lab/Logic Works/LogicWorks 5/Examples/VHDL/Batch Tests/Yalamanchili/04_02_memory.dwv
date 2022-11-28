@@ -1,0 +1,46 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+--use WORK.std_logic_arith.all;
+
+entity memory is
+
+  port (
+       address, write_data   : in    std_logic_vector(31 downto 0);
+       MemWrite, MemRead   : in    std_logic;
+       read_data   : out    std_logic_vector(31 downto 0)
+       );
+
+end memory;
+
+architecture behavioral of memory is
+  type mem_array is array(0 to 7) of std_logic_vector(31 downto 0);
+begin
+  
+  -- NOTE: This could use a couple of improvements, but we'll leave
+  -- it like this so it is the same as the book
+  --  - the process should have MemRead and MemWrite in its sens list
+  --  - a write operation should update the outputs
+  --  - when no operation is occurring, the outputs should be disabled
+  
+  mem_process:
+	process(address, write_data)
+	  variable data_mem : mem_array := (to_stdlogicvector(X"00000010"),
+										to_stdlogicvector(X"00000011"),
+										to_stdlogicvector(X"00000012"),
+										to_stdlogicvector(X"00000013"),
+										to_stdlogicvector(X"00000014"),
+										to_stdlogicvector(X"00000015"),
+										to_stdlogicvector(X"00000016"),
+										to_stdlogicvector(X"00000017"));
+	  variable addr : integer;
+	begin
+	  addr := to_integer(address(2 downto 0));
+	  if MemWrite = '1' then
+	    data_mem(addr) := write_data;
+
+	  elsif MemRead = '1' then
+	    read_data <= data_mem(addr) after 10ns;
+	  end if;
+	end process mem_process;
+
+end behavioral;

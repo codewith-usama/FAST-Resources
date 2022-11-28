@@ -1,0 +1,27 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity operator_test is
+
+  port (
+       In0   : in    integer;
+       In1   : in    integer;
+       In2   : in    integer;
+       Out0 : out integer;
+	   Out1 : out integer;
+	   Out2 : out integer;
+	   Out3 : out integer
+       );
+
+end operator_test;
+
+architecture behavioral of operator_test is
+
+begin
+
+  Out0 <= -In0 + In1 ** In2 after 10 ps;
+  Out1 <= (In0 - In1) rem In2 after 10 ps;
+  Out2 <= (In0 * In1) mod In2 after 10 ps;
+  Out3 <= abs (In1 - In0) / In2 after 10 ps;
+
+end behavioral;

@@ -1,0 +1,115 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_arith.all;
+use ieee.std_logic_unsigned.all;
+library work;
+use work.microcode.all;
+
+entity ALU1_rom is
+    port (addr       :in std_logic_vector (10 downto 0);
+          ALU1       :out MCT_ALU1
+         );
+end ALU1_rom;
+
+
+architecture ALU1_rom_arch of ALU1_rom is
+begin
+  process (addr)
+  begin
+    case addr is
+        when "01101101100" =>    ALU1 <= MC_A_REG;
+        when "01111101100" =>    ALU1 <= MC_A_REG;
+        when "01111001100" =>    ALU1 <= MC_A_REG;
+        when "01101001001" =>    ALU1 <= MC_A_REG;
+        when "01100001110" =>    ALU1 <= MC_A_REG;
+        when "01110001110" =>    ALU1 <= MC_A_REG;
+        when "01100101011" =>    ALU1 <= MC_A_REG;
+        when "01110101011" =>    ALU1 <= MC_A_REG;
+        when "00101101100" =>    ALU1 <= MC_A_REG;
+        when "00111101100" =>    ALU1 <= MC_A_REG;
+        when "00111001100" =>    ALU1 <= MC_A_REG;
+        when "00101001001" =>    ALU1 <= MC_A_REG;
+        when "00100001110" =>    ALU1 <= MC_A_REG;
+        when "00110001110" =>    ALU1 <= MC_A_REG;
+        when "00100101011" =>    ALU1 <= MC_A_REG;
+        when "00110101011" =>    ALU1 <= MC_A_REG;
+        when "00001110100" =>    ALU1 <= MC_DIN;
+        when "00011110100" =>    ALU1 <= MC_DIN;
+        when "00001010000" =>    ALU1 <= MC_A_REG;
+        when "00000110011" =>    ALU1 <= MC_DIN;
+        when "00010110011" =>    ALU1 <= MC_DIN;
+        when "00101100100" =>    ALU1 <= MC_A_REG;
+        when "00100100011" =>    ALU1 <= MC_A_REG;
+        when "11001101100" =>    ALU1 <= MC_A_REG;
+        when "11011101100" =>    ALU1 <= MC_A_REG;
+        when "11011001100" =>    ALU1 <= MC_A_REG;
+        when "11001001001" =>    ALU1 <= MC_A_REG;
+        when "11000001110" =>    ALU1 <= MC_A_REG;
+        when "11010001110" =>    ALU1 <= MC_A_REG;
+        when "11000101011" =>    ALU1 <= MC_A_REG;
+        when "11010101011" =>    ALU1 <= MC_A_REG;
+        when "11101100100" =>    ALU1 <= MC_X_REG;
+        when "11100000001" =>    ALU1 <= MC_X_REG;
+        when "11100100011" =>    ALU1 <= MC_X_REG;
+        when "11001100100" =>    ALU1 <= MC_Y_REG;
+        when "11000000001" =>    ALU1 <= MC_Y_REG;
+        when "11000100011" =>    ALU1 <= MC_Y_REG;
+        when "11001110100" =>    ALU1 <= MC_DIN;
+        when "11011110100" =>    ALU1 <= MC_DIN;
+        when "11000110011" =>    ALU1 <= MC_DIN;
+        when "11010110011" =>    ALU1 <= MC_DIN;
+        when "11001010000" =>    ALU1 <= MC_X_REG;
+        when "10001000000" =>    ALU1 <= MC_Y_REG;
+        when "01001101100" =>    ALU1 <= MC_A_REG;
+        when "01011101100" =>    ALU1 <= MC_A_REG;
+        when "01011001100" =>    ALU1 <= MC_A_REG;
+        when "01001001001" =>    ALU1 <= MC_A_REG;
+        when "01000001110" =>    ALU1 <= MC_A_REG;
+        when "01010001110" =>    ALU1 <= MC_A_REG;
+        when "01000101011" =>    ALU1 <= MC_A_REG;
+        when "01010101011" =>    ALU1 <= MC_A_REG;
+        when "11101110100" =>    ALU1 <= MC_DIN;
+        when "11111110100" =>    ALU1 <= MC_DIN;
+        when "11100110011" =>    ALU1 <= MC_DIN;
+        when "11110110011" =>    ALU1 <= MC_DIN;
+        when "11101000000" =>    ALU1 <= MC_X_REG;
+        when "11001000000" =>    ALU1 <= MC_Y_REG;
+        when "01001110100" =>    ALU1 <= MC_DIN;
+        when "01011110100" =>    ALU1 <= MC_DIN;
+        when "01001010000" =>    ALU1 <= MC_A_REG;
+        when "01000110011" =>    ALU1 <= MC_DIN;
+        when "01010110011" =>    ALU1 <= MC_DIN;
+        when "00001101100" =>    ALU1 <= MC_A_REG;
+        when "00011101100" =>    ALU1 <= MC_A_REG;
+        when "00011001100" =>    ALU1 <= MC_A_REG;
+        when "00001001001" =>    ALU1 <= MC_A_REG;
+        when "00000001110" =>    ALU1 <= MC_A_REG;
+        when "00010001110" =>    ALU1 <= MC_A_REG;
+        when "00000101011" =>    ALU1 <= MC_A_REG;
+        when "00010101011" =>    ALU1 <= MC_A_REG;
+        when "00101110100" =>    ALU1 <= MC_DIN;
+        when "00111110100" =>    ALU1 <= MC_DIN;
+        when "00101010000" =>    ALU1 <= MC_A_REG;
+        when "00100110011" =>    ALU1 <= MC_DIN;
+        when "00110110011" =>    ALU1 <= MC_DIN;
+        when "01101110100" =>    ALU1 <= MC_DIN;
+        when "01111110100" =>    ALU1 <= MC_DIN;
+        when "01101010000" =>    ALU1 <= MC_A_REG;
+        when "01100110011" =>    ALU1 <= MC_DIN;
+        when "01110110011" =>    ALU1 <= MC_DIN;
+        when "11101101100" =>    ALU1 <= MC_A_REG;
+        when "11111101100" =>    ALU1 <= MC_A_REG;
+        when "11111001100" =>    ALU1 <= MC_A_REG;
+        when "11101001001" =>    ALU1 <= MC_A_REG;
+        when "11100001110" =>    ALU1 <= MC_A_REG;
+        when "11110001110" =>    ALU1 <= MC_A_REG;
+        when "11100101011" =>    ALU1 <= MC_A_REG;
+        when "11110101011" =>    ALU1 <= MC_A_REG;
+        when "10101010000" =>    ALU1 <= MC_A_REG;
+        when "10101000000" =>    ALU1 <= MC_A_REG;
+        when "10001010000" =>    ALU1 <= MC_X_REG;
+        when "10011000000" =>    ALU1 <= MC_Y_REG;
+        when others =>    ALU1 <= MC_A_REG;
+    end case;
+  end process;
+end ALU1_rom_arch;

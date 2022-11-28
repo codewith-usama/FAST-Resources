@@ -1,0 +1,279 @@
+*** DWL File Format for LogicWorks(tm) ***
+
+IMPORTANT NOTE:  This note is not intended as a complete definition of the DWL format.  Enough information is provided to allow users to create simple PLA formats.  However, it is beyond the scope of this note to describe all possible values of all fields.  No other public documentation is available, and we regret that we cannot provide technical support for PLA import issues.
+
+
+*** The DWL File Format (Version 3) ***
+
+The DWL file format that includes symbol annotations, AND-OR plane (PLA), adjoining input cells, and adjoining output cells with feedback structures.
+
+
+*** DWL File Syntax ***
+
+(PLD dwlVersionNumber
+    (NAME deviceName)
+    (N_PINS numberOfDevicePins)
+    (PORT 1 portType innodeNumber outnodeNumber
+        [(NAME portName)]
+    )
+    (PORT 2 ...)
+    .
+    .
+    .
+    (PORT numberOfDevicePins ...)
+    (STRUCT
+        (PLASIZE numberOfPLAInputs numberOfPLAOutputs
+                numberOfRoutes numberOfBlocks)
+        (N_SIGS numberOfSignals)
+        (ORNODE 0 orType bufType
+                [ ORPINANDpinNumber1 ]
+                | [ ORPINXORpinNumber1 ]
+                | [ OR2ANDpinNumber1 OR2ANDpinNumber2 ]
+                | [ OR2ORpinNumber1 OR2ORpinNumber2 ]
+            (PT arrayNumber productTerm) 
+            (PT ...) 
+            .
+            .
+            .
+            (PT ...) 
+        )
+        (ORNODE 1 ...)
+        .
+        .
+        .
+        (ORNODE numberOfPLAOutputs-1 ...)
+        (INNODE 0 arrayNumber
+            plaInputNumber0 ... plaInputNumber numberOfBlocks-1)
+        )
+        (INNODE 1 ...)
+        .
+        .
+        .
+        (INNODE numberOfSignals-1 ...)
+        (OUTNODE 0 outType bufType logicType
+            regInput1OUTNumber
+            regInput2OUTNumber
+            mainInputORNumber
+            outputEnableORNumber
+            asyncResetORNumber
+            asyncPresetORNumber
+            asyncLoadORNumber
+            syncResetORNumber
+            syncPresetORNumber
+            syncLoadORNumber
+            clockORNumber
+            clockEnableORNumber
+            bypassFlag
+            feedBackDataINNumber
+            feedBackQNotINNumber
+            feedBackQINNumber
+            feedBackPinINNumber
+            functionControlOUTNumber
+            dynamicFlipFlopType 
+        )
+        (OUTNODE 1 ...)
+        .
+        .
+        .
+        (OUTNODE numberOfSignals-1...)
+    )
+)
+
+NOTES:
+
+1) All levels of the DWL file are required except those denoted in square brackets ,e.g. [(NAME portName)] is optional.  Order of keywords must be maintained.
+2) All round brackets are required and all spaces, newlines, tabs are field separators and skipped over.  Keywords appear in all upper-case characters.
+3) PORT entries are number sequentially from 1 to the "numberOfDevicePins".  ORNODE entries are number from 0 to the "numberOfPLAOutputs" less one.  INNODE & OUTNODE entries are number sequentially from 0 to the "numberOfSignals" less one.  All entries for each respective section must appear.
+
+
+*** DWL File Values ***
+
+Port Types:
+
+0 - UNUSED port.
+1 - POWER port.
+2 - GROUND port.
+3 - INPUT port.
+4 - OUTPUT port.
+5 - BIDIRECTIONAL port.
+
+Buffer Types:
+
+0 - UNUSED buffer, ORNODES & OUTNODES.
+1 - NORMAL buffer, ORNODES & OUTNODES
+2 - INVERTED buffer, ORNODES & OUTNODES.
+3 - XOR buffer, ORNODES only.
+4 - XNOR buffer, ORNODES only.
+
+Logic Types:
+
+0 - TTL logic OUTNODE.
+1 - ECL logic OUTNODE.
+2 - OC logic OUTNODE.
+
+OR Types:
+
+0 - UNUSED PLA output
+2, 3, 4, 13 - PAL, FPLA, SHARE, or LIST with 1 or more product terms assigned to output.
+5 - GROUND, always logic 0 output.
+6 - POWER, always logic 1 output.
+7 - PIN, special indirect connection to PORT
+8 - PINAND, special indirect input from PORT and PLA output ANDed together.
+9 - AND, special indirect ANDing of two PORTs.
+10 - OR, special indirect ORing of two PORTs.
+12 - PINXOR, special indirect input from PORT and PLA output XORed together.
+
+OUT Types:
+
+0 - COMBINATIONAL
+Required: mainInputORNumber; 
+Optional: outputEnableORNumber. 
+Miscellaneous: Bypass = 0, all unused ORNumbers & feedbacks = -1.
+
+1 - D FLIP FLOP
+Required: mainInputORNumber (D), clockORNumber; 
+Optional: outputEnableORNumber, 1 of asyncResetORNumber or syncResetORNumber, 1 of asyncPresetORNumber or syncPresetORNumber, 1 of asyncLoadORNumber or syncLoadORNumber.
+Miscellaneous: Bypass = 0, all unused ORNumbers & feedbacks = -1.
+
+2 - T FLIP FLOP
+Required: mainInputORNumber (T), clockORNumber; 
+Optional: outputEnableORNumber, 1 of asyncResetORNumber or syncResetORNumber, 1 of asyncPresetORNumber or syncPresetORNumber, 1 of asyncLoadORNumber or syncLoadORNumber.
+Miscellaneous: Bypass = 0, all unused ORNumbers & feedbacks = -1.
+
+3 - JK FLIP FLOP
+Required: mainInputORNumber (J), regInput2OUTNumber (K), clockORNumber; 
+Optional: outputEnableORNumber, 1 of asyncResetORNumber or syncResetORNumber, 1 of asyncPresetORNumber or syncPresetORNumber, 1 of asyncLoadORNumber or syncLoadORNumber.
+Miscellaneous: Bypass = 0, all unused ORNumbers & feedbacks = -1.
+
+4 - JK-D FLIP FLOP
+Required: regInput1OUTNumber (J/D), regInput2OUTNumber (K), clockORNumber, functionControlOUTNumber; 
+Optional: outputEnableORNumber, 1 of asyncResetORNumber or syncResetORNumber, 1 of asyncPresetORNumber or syncPresetORNumber, 1 of asyncLoadORNumber or syncLoadORNumber.
+Miscellaneous: Bypass = 0, all unused ORNumbers & feedbacks = -1.
+
+5 - RS FLIP FLOP
+Required: mainInputORNumber (Set), regInput2OUTNumber (Reset), clockORNumber; 
+Optional: outputEnableORNumber, 1 of asyncResetORNumber or syncResetORNumber, 1 of asyncPresetORNumber or syncPresetORNumber, 1 of asyncLoadORNumber or syncLoadORNumber.
+Miscellaneous: Bypass = 0, all unused ORNumbers & feedbacks = -1.
+
+7 - LATCH (Transparent Low)
+Required: mainInputORNumber (L), clockORNumber; 
+Optional: outputEnableORNumber, 1 of asyncResetORNumber or syncResetORNumber, 1 of asyncPresetORNumber or syncPresetORNumber, 1 of asyncLoadORNumber or syncLoadORNumber.
+Miscellaneous: Bypass = 0, all unused ORNumbers & feedbacks = -1.
+
+11 - D FLIP FLOP (Gated Clock)
+Required: mainInputORNumber (D), clockORNumber, clockEnableORNumber; 
+Optional: outputEnableORNumber, 1 of asyncResetORNumber or syncResetORNumber, 1 of asyncPresetORNumber or syncPresetORNumber, 1 of asyncLoadORNumber or syncLoadORNumber.
+Miscellaneous: Bypass = 0, all unused ORNumbers & feedbacks = -1.
+
+12 - LATCH (Transparent High)
+Required: mainInputORNumber (L), clockORNumber; 
+Optional: outputEnableORNumber, 1 of asyncResetORNumber or syncResetORNumber, 1 of asyncPresetORNumber or syncPresetORNumber, 1 of asyncLoadORNumber or syncLoadORNumber.
+Miscellaneous: Bypass = 0, all unused ORNumbers & feedbacks = -1.
+
+15, 16 - PROGRAMMABLE D/T/JK FLIP FLOP
+Required: mainInputORNumber (D/T), regInput1OUTNumber (J/D), regInput2OUTNumber (K), clockORNumber, functionControlOUTNumber, dynamicFlipFlopType; 
+Optional: outputEnableORNumber, 1 of asyncResetORNumber or syncResetORNumber, 1 of asyncPresetORNumber or syncPresetORNumber, 1 of asyncLoadORNumber or syncLoadORNumber.
+
+Miscellaneous: Bypass = 0, all unused ORNumbers & feedbacks = -1.
+
+Dynamic Flip Flop Modes:
+
+1 - D to JK
+2 - JK to D
+3 - D to T
+4 - T to D.
+
+Text Types:
+
+deviceName - Name of top level device symbol & library name.  Maximum length is 15 or 31 characters depending on your version of DesignWorks.
+
+portName - Name to be used on top level device symbol for pin annotation & as port connector name.  Maximum length is 15 characters.
+
+productTerm - Product term is annotated using [0,1,X], with leftmost character corresponding to the most significant PLA input bit and the rightmost corresponding the least significant PLA input bit.  Maximum length is 255 characters.  The length of the product term string must match the number of PLA input described in the PLASIZE specifier (numberOfPLAInputs).  An example is:
+     X1X0
+where inorder to make this product term true, PLA input bit 0 must be low and PLA input bit 2 must be high.  The other input bits are ignore as signified by the 'X' which implies a don't care bit.
+
+
+*** A DWL File Example for a Simple PLA ***
+
+Note: Everything following the double quote " is a comment.
+
+(PLD 3
+    (NAME SIMPLEPLA)
+    (N_PINS 10)
+    (PORT 1 3 0 -1    " Pin 1, Input, connect to INNODE 0
+        (NAME A)
+    )
+    (PORT 2 3 1 -1    " Pin 2, Input, connect to INNODE 1
+        (NAME B)
+    )
+    (PORT 3 3 2 -1    " Pin 3, Input, connect to INNODE 2
+        (NAME C)
+    )
+    (PORT 4 3 3 -1    " Pin 4, Input, connect to INNODE 3
+        (NAME D)
+    )
+    (PORT 5 3 4 -1    " Pin 5, Input, connect to INNODE 4
+        (NAME E)
+    )
+    (PORT 6 3 5 -1    " Pin 6, Input, connect to INNODE 5
+        (NAME F)
+    )
+    (PORT 7 4 -1 6    " Pin 7, Output, connect to OUTNODE 6
+        (NAME W)
+    )
+    (PORT 8 4 -1 7    " Pin 8, Output, connect to OUTNODE 7
+        (NAME X)
+    )
+    (PORT 9 4 -1 8    " Pin 9, Output, connect to OUTNODE 8
+        (NAME Y)
+    )
+    (PORT 10 4 -1 9    " Pin 10, Output, connect to OUTNODE 9
+        (NAME Z)
+    )
+    (STRUCT
+        (PLASIZE 6 4 1 1)
+        (N_SIGS 10)
+        (ORNODE 0 13 1
+            (PT 0 111111)    " F & E & D & C & B & A
+        )
+        (ORNODE 1 13 1
+            (PT 0 000000)    " !(F # E # D # C # B # A)
+        )
+        (ORNODE 2 13 1        " F # E # D # C # B # A
+            (PT 0 XXXXX1)    " if A
+            (PT 0 XXXX1X)    " or if B
+            (PT 0 XXX1XX)    " or if C
+            (PT 0 XX1XXX)    " or if D
+            (PT 0 X1XXXX)    " or if E
+            (PT 0 1XXXXX)    " or if F
+        )
+        (ORNODE 3 13 2        " Note '2' implies INVERT result
+            (PT 0 111111)    " !(F & E & D & C & B & A)
+        )
+        (INNODE 0 0 0)        " Connect to PLA input 0
+        (INNODE 1 0 1)        " Connect to PLA input 1
+        (INNODE 2 0 2)        " Connect to PLA input 2
+        (INNODE 3 0 3)        " Connect to PLA input 3
+        (INNODE 4 0 4)        " Connect to PLA input 4
+        (INNODE 5 0 5)        " Connect to PLA input 5
+        (INNODE 6 -1 -1)        " No connection to PLA
+        (INNODE 7 -1 -1)        " No connection to PLA
+        (INNODE 8 -1 -1)        " No connection to PLA
+        (INNODE 9 -1 -1)        " No connection to PLA
+        (OUTNODE 0 0 0 0 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 0 -1 -1 -1 -1 -1 -1)
+        (OUTNODE 1 0 0 0 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 0 -1 -1 -1 -1 -1 -1)
+        (OUTNODE 2 0 0 0 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 0 -1 -1 -1 -1 -1 -1)
+        (OUTNODE 3 0 0 0 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 0 -1 -1 -1 -1 -1 -1)
+        (OUTNODE 4 0 0 0 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 0 -1 -1 -1 -1 -1 -1)
+        (OUTNODE 5 0 0 0 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 0 -1 -1 -1 -1 -1 -1)
+        (OUTNODE 6 0 1 0 -1 -1 0 -1 -1 -1 -1 -1 -1 -1 -1 -1 0 -1 -1 -1 -1 -1 -1)
+        (OUTNODE 7 0 1 0 -1 -1 1 -1 -1 -1 -1 -1 -1 -1 -1 -1 0 -1 -1 -1 -1 -1 -1)
+        (OUTNODE 8 0 1 0 -1 -1 2 -1 -1 -1 -1 -1 -1 -1 -1 -1 0 -1 -1 -1 -1 -1 -1)
+        (OUTNODE 9 0 1 0 -1 -1 3 -1 -1 -1 -1 -1 -1 -1 -1 -1 0 -1 -1 -1 -1 -1 -1)
+    )
+)
+
+
+DesignWorks and LogicWorks are trademarks of Capilano Computing Systems Ltd.  MacABEL is a trademark of Data I/O Corporation.  ABEL is a registered trademark of Data I/O Corporation.
+

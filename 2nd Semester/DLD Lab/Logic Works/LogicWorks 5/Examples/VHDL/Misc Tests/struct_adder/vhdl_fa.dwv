@@ -1,0 +1,25 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+
+entity vhdl_fa is 
+
+ port(
+		c_in	: in	std_logic;
+		a	: in	std_logic;
+		b	: in	std_logic;
+		sum	: out	std_logic;
+		c_out	: out	std_logic
+	);
+
+end vhdl_fa;
+
+
+architecture arch1 of vhdl_fa is
+
+begin
+
+  sum <= a xor b xor c_in after 2 ns;
+  c_out <= (b and c_in) or (a and c_in) or (a and b) after 1 ns;
+
+end arch1;

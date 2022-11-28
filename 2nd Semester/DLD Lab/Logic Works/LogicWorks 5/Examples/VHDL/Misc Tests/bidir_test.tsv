@@ -1,0 +1,10 @@
+$I ENA	$I ENB	$I A	$I B	$E A	$E B
+1	1			.dc	.dc
+0	0			.z	.z
+0	1	1		.dc	1
+0	1	0		.dc	0
+0	0			.dc	.z
+1	0		1	1	.dc
+1	0		0	0	.dc
+0	0			.z	.dc
+

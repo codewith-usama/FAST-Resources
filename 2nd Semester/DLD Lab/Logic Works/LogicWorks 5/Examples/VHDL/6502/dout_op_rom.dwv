@@ -1,0 +1,74 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_arith.all;
+use ieee.std_logic_unsigned.all;
+library work;
+use work.microcode.all;
+
+entity DOUT_OP_rom is
+    port (addr       :in std_logic_vector (10 downto 0);
+          DOUT_OP    :out MCT_DOUT_OP
+         );
+end DOUT_OP_rom;
+
+
+architecture DOUT_OP_rom_arch of DOUT_OP_rom is
+begin
+  process (addr)
+  begin
+    case addr is
+        when "00001110101" =>    DOUT_OP <= MC_DINT3;
+        when "00011110101" =>    DOUT_OP <= MC_DINT3;
+        when "00000110100" =>    DOUT_OP <= MC_DINT3;
+        when "00010110100" =>    DOUT_OP <= MC_DINT3;
+        when "00000000010" =>    DOUT_OP <= MC_PCH;
+        when "00000000011" =>    DOUT_OP <= MC_PCL;
+        when "00000000100" =>    DOUT_OP <= MC_P_REG;
+        when "11001110101" =>    DOUT_OP <= MC_DINT3;
+        when "11011110101" =>    DOUT_OP <= MC_DINT3;
+        when "11000110100" =>    DOUT_OP <= MC_DINT3;
+        when "11010110100" =>    DOUT_OP <= MC_DINT3;
+        when "11101110101" =>    DOUT_OP <= MC_DINT3;
+        when "11111110101" =>    DOUT_OP <= MC_DINT3;
+        when "11100110100" =>    DOUT_OP <= MC_DINT3;
+        when "11110110100" =>    DOUT_OP <= MC_DINT3;
+        when "00100000001" =>    DOUT_OP <= MC_PCH;
+        when "00100000010" =>    DOUT_OP <= MC_PCL;
+        when "01001110101" =>    DOUT_OP <= MC_DINT3;
+        when "01011110101" =>    DOUT_OP <= MC_DINT3;
+        when "01000110100" =>    DOUT_OP <= MC_DINT3;
+        when "01010110100" =>    DOUT_OP <= MC_DINT3;
+        when "01001000000" =>    DOUT_OP <= MC_A_REG;
+        when "00001000000" =>    DOUT_OP <= MC_P_REG;
+        when "00101110101" =>    DOUT_OP <= MC_DINT3;
+        when "00111110101" =>    DOUT_OP <= MC_DINT3;
+        when "00100110100" =>    DOUT_OP <= MC_DINT3;
+        when "00110110100" =>    DOUT_OP <= MC_DINT3;
+        when "01101110101" =>    DOUT_OP <= MC_DINT3;
+        when "01111110101" =>    DOUT_OP <= MC_DINT3;
+        when "01100110100" =>    DOUT_OP <= MC_DINT3;
+        when "01110110100" =>    DOUT_OP <= MC_DINT3;
+        when "10001101010" =>    DOUT_OP <= MC_A_REG;
+        when "10011001010" =>    DOUT_OP <= MC_A_REG;
+        when "10000001100" =>    DOUT_OP <= MC_A_REG;
+        when "10010001100" =>    DOUT_OP <= MC_A_REG;
+        when "10000101001" =>    DOUT_OP <= MC_A_REG;
+        when "10010101001" =>    DOUT_OP <= MC_A_REG;
+        when "10011101010" =>    DOUT_OP <= MC_A_REG;
+        when "01000011010" =>    DOUT_OP <= MC_PCH;
+        when "01000011011" =>    DOUT_OP <= MC_PCL;
+        when "01000011100" =>    DOUT_OP <= MC_P_REG;
+        when "00110011010" =>    DOUT_OP <= MC_PCH;
+        when "00110011011" =>    DOUT_OP <= MC_PCL;
+        when "00110011100" =>    DOUT_OP <= MC_P_REG;
+        when "10001110010" =>    DOUT_OP <= MC_X_REG;
+        when "10000110001" =>    DOUT_OP <= MC_X_REG;
+        when "10010110001" =>    DOUT_OP <= MC_X_REG;
+        when "10001100010" =>    DOUT_OP <= MC_Y_REG;
+        when "10000100001" =>    DOUT_OP <= MC_Y_REG;
+        when "10010100001" =>    DOUT_OP <= MC_Y_REG;
+        when others =>    DOUT_OP <= MC_NOP;
+    end case;
+  end process;
+end DOUT_OP_rom_arch;
+

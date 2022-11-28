@@ -1,0 +1,29 @@
+use work.AND_GATE;
+use work.NAND_GATE;
+
+-- TESTS:
+--
+--	- Top-level generics
+--	- Vector width based on constant
+--	- Instantiating components defined in VHDL
+--	- Connecting slices to component ports
+
+entity GATES is 
+ generic(N : natural);
+ port(
+		A	: in	bit_vector(1 to N);
+		Z	: out	bit
+	);
+
+end GATES;
+
+
+architecture arch1 of GATES is
+	signal S1, S2 : bit;
+begin
+
+	N1: NAND_GATE generic map(N/2) port map(A(1 to N/2), S1);
+	N2: NAND_GATE generic map(N/2) port map(A(N/2+1 to N), S2);
+	Z <= S1 and S2;
+
+end arch1;

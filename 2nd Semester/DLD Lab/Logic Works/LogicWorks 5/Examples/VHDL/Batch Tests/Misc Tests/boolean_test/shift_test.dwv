@@ -1,0 +1,39 @@
+use work.bool_decl.all;
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity shift_test is
+
+  port (
+       in1  : in    bool_array;
+       in2 : in std_logic_vector(7 downto 0);
+       sel : in bool_sel;
+       sh : in bool_sel;
+       out1   : out    bool_array;
+       out2   : out    std_logic_vector(7 downto 0)
+       );
+
+end shift_test;
+
+architecture behavioral of shift_test is
+begin
+  
+  with sel select
+  			out1 <= in1 sll sh when 0,
+  			        in1 srl sh when 1,
+  			        in1 rol sh when 2,
+  			        in1 ror sh when 3,
+  			        in1 sla sh when 4,
+  			        in1 sra sh when 5,
+  			        in1 when others;
+
+  with sel select
+  			out2 <= in2 sll sh when 0,
+  					in2 srl sh when 1,
+  			        in2 rol sh when 2,
+  			        in2 ror sh when 3,
+  			        in2 sla sh when 4,
+  			        in2 sra sh when 5,
+  			        in2 when others;
+
+end behavioral;

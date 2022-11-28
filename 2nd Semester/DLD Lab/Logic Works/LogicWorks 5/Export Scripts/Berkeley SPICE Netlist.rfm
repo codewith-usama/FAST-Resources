@@ -1,0 +1,43 @@
+{
+  C. Dewhurst, May 27, 1997
+  ©1996-2000 Capilano Computing Systems Ltd.
+}
+$NOTES
+This format generates a netlist for Berkeley SPICE from a LogicWorks circuit.  In this format, signals are numbered, with signal 0 being ground and 1, 2, 3, etc. being other nets.
+
+To use alphanumeric signal names in the netlist, use the Commercial SPICE format.
+
+IMPORTANT:  Devices must be named in accordance with SPICE naming conventions, e.g. resistors must be named Rxxx, etc.
+
+
+Non-standard attribute fields required:
+
+Field name    Where     Usage
+
+Spice         Devices   Contains SPICE parameters
+
+$END
+$COMPATIBLE(a69ff19e)
+$FIND $DEVICES $NOT &Spice
+$CHECK(Spice field missing in one or more devices!) $DEVICES
+$FIND $DEVICES
+$SIGSOURCE(0)
+$DEVPINSEQUENCE &PinSequence
+$CREATEREPORT($DESIGNNAME.IN) $PROMPT
+$COMBDEVSOFF
+$DESIGNNAME   $DATE   $TIME
+$DEVPINFORMAT $SIGSEQ(0)
+$SORT $SIGNALS $SIGSOURCE $SIGNAME
+$SORT $DEVICES $DEVNAME
+*
+* The following lines are derived from the design's Spice attribute field.
+* To change these, deselect all circuit elements, select the Get Info command,
+* and click the Design Attributes button.
+*
+&Spice
+*
+* Following is the listing of all devices in the circuit and their SPICE parameters.
+* To set the SPICE parameters, right-click on a device and select the Attributes command.
+*
+$DEVICES$DEVHIERNAME $PINS &Spice
+.END

@@ -1,0 +1,8 @@
+$I In1	$I In2	$I In3	$E Out1	$E Out2	$E Out3
+0	0	0	00	68	FF
+F	F	F	00	57	10
+F	F	C	30	57	30
+F	3	C	F0	77	F0
+0	0	F	FF	6F	FF
+0	5	0	50	40	FA
+E	1	0	10	66	F0

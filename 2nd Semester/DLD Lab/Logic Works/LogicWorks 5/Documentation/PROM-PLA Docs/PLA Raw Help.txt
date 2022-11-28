@@ -1,0 +1,32 @@
+Raw PLA Format Help
+
+This data format allows you to specify the contents of a PLA device using hexadecimal characters in a non-structured format.  The following points summarize this format:
+
+- Each output bit is specified as a separate text block.  You must click the Next button after each output bit is specified.
+- Each line of text represents one product term in the PLA.  
+- Any number of product term lines (including zero) can be specified and they are effectively OR'd together.
+- Each line should contain exactly N non-blank characters, where N is the number of inputs. Blanks can be inserted anywhere and are ignored.
+- Each character must be either a 0, 1, X or x.  0 matches a low input, 1 matches a high input and X or x match any input.
+- Inputs are specified from the most significant input bit to the least.
+- No error messages are given.  If a line does not contain sufficient characters for the number of PLA inputs, X's are assumed in the unspecified low-order bits.  If too many characters are specified, the extra characters on a line are ignored.
+- CAUTION: Based on the previous rule, an empty line will be taken as all X's, meaning that it will match any input combination.  This means the PLA output will always be active, regardless of other inputs!
+
+
+EXAMPLES:
+
+The following text will cause a 2-input, 1-output PLA to function as an XOR gate:
+
+01
+10
+
+The following text will generate an active output if any number of input bits are 1:
+
+XXXXXXX1
+XXXXXX1X
+XXXXX1XX
+XXXX1XXX
+XXX1XXXX
+XX1XXXXX
+X1XXXXXX
+1XXXXXXX
+

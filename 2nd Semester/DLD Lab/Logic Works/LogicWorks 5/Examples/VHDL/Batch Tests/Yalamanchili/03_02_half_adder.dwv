@@ -1,0 +1,24 @@
+-- From VHDL Starter's Guide - Yalamanchili - p. 32
+
+library IEEE;
+use IEEE.std_logic_1164.all;
+use work.all;
+
+
+entity half_adder is
+
+  port (
+       a, b         : in    std_ulogic;
+       sum, carry   : out   std_ulogic
+       );
+
+end half_adder;
+
+architecture concurrent_behavior of half_adder is 
+begin
+
+
+  sum <= (a xor b) AFTER 5ns;
+  carry <= (a and b) AFTER 5ns;
+
+end concurrent_behavior;

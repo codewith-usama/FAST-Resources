@@ -1,0 +1,107 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_arith.all;
+use ieee.std_logic_unsigned.all;
+library work;
+use work.microcode.all;
+
+entity DINT1_OP_rom is
+    port (addr       :in std_logic_vector (10 downto 0);
+          DINT1_OP   :out MCT_DINT1_OP
+         );
+end DINT1_OP_rom;
+
+
+architecture DINT1_OP_rom_arch of DINT1_OP_rom is
+begin
+  process (addr)
+  begin
+    case addr is
+        when "01101101001" =>    DINT1_OP <= MC_DIN;
+        when "01111101001" =>    DINT1_OP <= MC_DIN;
+        when "01111001001" =>    DINT1_OP <= MC_DIN;
+        when "01100001011" =>    DINT1_OP <= MC_DIN;
+        when "01110001011" =>    DINT1_OP <= MC_DIN;
+        when "00101101001" =>    DINT1_OP <= MC_DIN;
+        when "00111101001" =>    DINT1_OP <= MC_DIN;
+        when "00111001001" =>    DINT1_OP <= MC_DIN;
+        when "00100001011" =>    DINT1_OP <= MC_DIN;
+        when "00110001011" =>    DINT1_OP <= MC_DIN;
+        when "00001110001" =>    DINT1_OP <= MC_DIN;
+        when "00011110001" =>    DINT1_OP <= MC_DIN;
+        when "00000110001" =>    DINT1_OP <= MC_DIN;
+        when "00010110001" =>    DINT1_OP <= MC_DIN;
+        when "00101100001" =>    DINT1_OP <= MC_DIN;
+        when "00000000010" =>    DINT1_OP <= MC_DIN;
+        when "11001101001" =>    DINT1_OP <= MC_DIN;
+        when "11011101001" =>    DINT1_OP <= MC_DIN;
+        when "11011001001" =>    DINT1_OP <= MC_DIN;
+        when "11000001011" =>    DINT1_OP <= MC_DIN;
+        when "11010001011" =>    DINT1_OP <= MC_DIN;
+        when "11101100001" =>    DINT1_OP <= MC_DIN;
+        when "11001100001" =>    DINT1_OP <= MC_DIN;
+        when "11001110001" =>    DINT1_OP <= MC_DIN;
+        when "11011110001" =>    DINT1_OP <= MC_DIN;
+        when "11000110001" =>    DINT1_OP <= MC_DIN;
+        when "11010110001" =>    DINT1_OP <= MC_DIN;
+        when "01001101001" =>    DINT1_OP <= MC_DIN;
+        when "01011101001" =>    DINT1_OP <= MC_DIN;
+        when "01011001001" =>    DINT1_OP <= MC_DIN;
+        when "01000001011" =>    DINT1_OP <= MC_DIN;
+        when "01010001011" =>    DINT1_OP <= MC_DIN;
+        when "11101110001" =>    DINT1_OP <= MC_DIN;
+        when "11111110001" =>    DINT1_OP <= MC_DIN;
+        when "11100110001" =>    DINT1_OP <= MC_DIN;
+        when "11110110001" =>    DINT1_OP <= MC_DIN;
+        when "01001100001" =>    DINT1_OP <= MC_DIN;
+        when "01101100001" =>    DINT1_OP <= MC_DIN;
+        when "01101100100" =>    DINT1_OP <= MC_DIN;
+        when "00100000001" =>    DINT1_OP <= MC_DIN;
+        when "10101101001" =>    DINT1_OP <= MC_DIN;
+        when "10111101001" =>    DINT1_OP <= MC_DIN;
+        when "10111001001" =>    DINT1_OP <= MC_DIN;
+        when "10100001011" =>    DINT1_OP <= MC_DIN;
+        when "10110001011" =>    DINT1_OP <= MC_DIN;
+        when "10101110001" =>    DINT1_OP <= MC_DIN;
+        when "10111110001" =>    DINT1_OP <= MC_DIN;
+        when "10101100001" =>    DINT1_OP <= MC_DIN;
+        when "10111100001" =>    DINT1_OP <= MC_DIN;
+        when "01001110001" =>    DINT1_OP <= MC_DIN;
+        when "01011110001" =>    DINT1_OP <= MC_DIN;
+        when "01000110001" =>    DINT1_OP <= MC_DIN;
+        when "01010110001" =>    DINT1_OP <= MC_DIN;
+        when "00001101001" =>    DINT1_OP <= MC_DIN;
+        when "00011101001" =>    DINT1_OP <= MC_DIN;
+        when "00011001001" =>    DINT1_OP <= MC_DIN;
+        when "00000001011" =>    DINT1_OP <= MC_DIN;
+        when "00010001011" =>    DINT1_OP <= MC_DIN;
+        when "00000011010" =>    DINT1_OP <= MC_DIN;
+        when "00101110001" =>    DINT1_OP <= MC_DIN;
+        when "00111110001" =>    DINT1_OP <= MC_DIN;
+        when "00100110001" =>    DINT1_OP <= MC_DIN;
+        when "00110110001" =>    DINT1_OP <= MC_DIN;
+        when "01101110001" =>    DINT1_OP <= MC_DIN;
+        when "01111110001" =>    DINT1_OP <= MC_DIN;
+        when "01100110001" =>    DINT1_OP <= MC_DIN;
+        when "01110110001" =>    DINT1_OP <= MC_DIN;
+        when "01000000100" =>    DINT1_OP <= MC_DIN;
+        when "01100000011" =>    DINT1_OP <= MC_DIN;
+        when "11101101001" =>    DINT1_OP <= MC_DIN;
+        when "11111101001" =>    DINT1_OP <= MC_DIN;
+        when "11111001001" =>    DINT1_OP <= MC_DIN;
+        when "11100001011" =>    DINT1_OP <= MC_DIN;
+        when "11110001011" =>    DINT1_OP <= MC_DIN;
+        when "10001101001" =>    DINT1_OP <= MC_DIN;
+        when "10011001001" =>    DINT1_OP <= MC_DIN;
+        when "10000001011" =>    DINT1_OP <= MC_DIN;
+        when "10010001011" =>    DINT1_OP <= MC_DIN;
+        when "10011101001" =>    DINT1_OP <= MC_DIN;
+        when "01000011010" =>    DINT1_OP <= MC_DIN;
+        when "00110011010" =>    DINT1_OP <= MC_DIN;
+        when "10001110001" =>    DINT1_OP <= MC_DIN;
+        when "10001100001" =>    DINT1_OP <= MC_DIN;
+        when others =>    DINT1_OP <= MC_NOP;
+    end case;
+  end process;
+end DINT1_OP_rom_arch;
+

@@ -1,0 +1,50 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity operator_test is
+
+  port (
+       In0   : in    integer;
+       Out0 : out integer
+       );
+
+end operator_test;
+
+architecture behavioral of operator_test is
+
+begin
+
+  process(In0)
+  variable t1, t2, t3 : time;
+  begin
+  	t1 := In0 * 1 ns;
+
+  	if t1 = 10 ns
+  	then
+  	  t2 := t1 / 2;
+  	elsif t1 < -10 ns
+  	then
+  	  t2 := abs t1;
+  	elsif t1 < 0 ns
+  	then
+  	  t2 := -t1;
+  	elsif t1 <= 5 ns
+  	then
+  	  t2 := t1 + 750 ps;
+  	elsif t1 > 100 ns
+  	then
+  	  t2 := t1 - 750 ps;
+  	elsif t1 >= 50 ns
+  	then
+  	  t2 := t1 * 2;
+  	elsif t1 /= 20 ns
+  	then
+  	  t2 := -t1;
+  	else
+  	  t2 := 100 ns - t1;
+  	end if;
+
+  	Out0 <= t2 / 1 ps;
+  end process;
+
+end behavioral;

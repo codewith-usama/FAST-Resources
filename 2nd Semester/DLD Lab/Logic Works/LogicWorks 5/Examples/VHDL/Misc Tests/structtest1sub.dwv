@@ -1,0 +1,15 @@
+ENTITY structtest1sub IS
+
+PORT( 
+		   i         : in    bit;
+		   o         : out   bit
+);
+
+END structtest1sub;
+
+ARCHITECTURE behave OF structtest1sub IS
+BEGIN
+
+	o <= i AFTER 500ps;
+
+END; 

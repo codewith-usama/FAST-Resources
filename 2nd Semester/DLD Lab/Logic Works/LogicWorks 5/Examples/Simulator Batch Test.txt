@@ -1,0 +1,40 @@
+-- This is a batch file list to run any number of simulations.
+-- Open any circuit document (.cct) so that the Simulation menu appears in the
+-- menu bar, then select the Run Batch File command and select this file.
+
+-- File paths in this file are relative to the location of the batch
+-- file itself
+
+VHDL\Misc Tests\bidir_test.dwv
+VHDL\Misc Tests\bool_test.dwv
+VHDL\Misc Tests\bus_test.dwv
+VHDL\Misc Tests\count8.dwv
+VHDL\Misc Tests\expr_test.dwv
+VHDL\Misc Tests\proc_test1.dwv
+VHDL\Misc Tests\full_adder_prims.dwv
+VHDL\Misc Tests\multiplier.dwv
+VHDL\Misc Tests\std_logic_func_test.dwv
+VHDL\Misc Tests\structgate.dwv
+VHDL\Misc Tests\structtest1.dwv
+VHDL\Misc Tests\state_test.dwv
+VHDL\Misc Tests\std_arith_test.dwv
+VHDL\Misc Tests\block_test.dwv
+VHDL\Misc Tests\func_test.dwv
+VHDL\Misc Tests\int_op_test.dwv
+VHDL\Misc Tests\time_op_test.dwv
+VHDL\Misc Tests\bit_op_test.dwv
+VHDL\Misc Tests\vec_array.dwv
+VHDL\Misc Tests\generic_test1\generic_reg.dwv
+VHDL\Misc Tests\generic_test1\generic_top.dwv
+VHDL\Misc Tests\generic_test2\generic_test.dwv
+VHDL\Misc Tests\boolean_test\boolean_test.dwv
+VHDL\Misc Tests\boolean_test\shift_test.dwv
+VHDL\Misc Tests\struct_adder\fa4.dwv
+VHDL\Yalamanchili\03_02_half_adder.dwv
+VHDL\Yalamanchili\03_03_full_adder.dwv
+VHDL\Yalamanchili\03_05_mux4.dwv
+VHDL\Yalamanchili\03_08_reg_file.dwv
+VHDL\Yalamanchili\04_02_memory.dwv
+VHDL\Yalamanchili\04_19_state_machine.dwv
+VHDL\Yalamanchili\08_02_full_adder\full_adder.dwv
+Simulation\Batch Tests\Gate Test.cct

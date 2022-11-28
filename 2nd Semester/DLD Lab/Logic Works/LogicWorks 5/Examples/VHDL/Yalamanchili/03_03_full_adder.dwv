@@ -1,0 +1,28 @@
+-- From VHDL Starter's Guide - Yalamanchili - p. 32
+
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+
+entity full_adder is
+
+  port (
+       in1, in2,c_in   : in    std_ulogic;
+       sum, c_out      : out   std_ulogic
+       );
+
+end full_adder;
+
+architecture dataflow of full_adder is
+signal s1, s2, s3 : std_ulogic;
+constant gate_delay: time := 5ns;
+
+begin
+
+  L1: s1 <= (In1 xor In2) after gate_delay;
+  L2: s2 <= (c_in and s1) after gate_delay;
+  L3: s3 <= (In1 and In2) after gate_delay;
+  L4: sum <= (s1 xor c_in) AFTER gate_delay;
+  L5: c_out <= (s2 or s3) AFTER gate_delay;
+
+end dataflow;

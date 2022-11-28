@@ -1,0 +1,7 @@
+
+package bool_decl is
+
+  type bool_array is array(7 downto 0) of boolean;
+  type bool_sel is range 0 to 15;
+
+end bool_decl;

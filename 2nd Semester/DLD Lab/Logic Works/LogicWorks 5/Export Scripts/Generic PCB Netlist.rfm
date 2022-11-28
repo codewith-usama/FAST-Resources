@@ -1,0 +1,21 @@
+{
+	Copyright 2000 by Capilano Computing Systems Ltd.
+	Generic PCB Netlist Report Script for LogicWorks
+}
+$NOTES
+Generic PCB Netlist
+
+This report lists all signals in the circuit, each one followed by a list of the attached pins.
+
+
+Attributes Required:
+
+None
+$END
+$COMPATIBLE(eaf31e8c)
+$CREATEREPORT($CIRCUITNAME Netlist.txt) $PROMPT
+$AUTONUMBER(3)
+$ASSIGNNAMES $SIGNALS
+$ASSIGNNAMES $DEVICES
+$SORT $SIGNALS $SIGNAME
+$SIGNALS$SIGNAME $PINS

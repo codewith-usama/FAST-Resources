@@ -1,0 +1,197 @@
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+--  The Free IP Project
+--  VHDL DES Core
+--  (c) 1999, The Free IP Project and David Kessner
+--
+--
+--  FREE IP GENERAL PUBLIC LICENSE
+--  TERMS AND CONDITIONS FOR USE, COPYING, DISTRIBUTION, AND MODIFICATION
+--
+--  1.  You may copy and distribute verbatim copies of this core, as long
+--      as this file, and the other associated files, remain intact and
+--      unmodified.  Modifications are outlined below.  Also, see the
+--      import/export warning above for further restrictions on
+--      distribution.
+--  2.  You may use this core in any way, be it academic, commercial, or
+--      military.  Modified or not.  
+--  3.  Distribution of this core must be free of charge.  Charging is
+--      allowed only for value added services.  Value added services
+--      would include copying fees, modifications, customizations, and
+--      inclusion in other products.
+--  4.  If a modified source code is distributed, the original unmodified
+--      source code must also be included (or a link to the Free IP web
+--      site).  In the modified source code there must be clear
+--      identification of the modified version.
+--  5.  Visit the Free IP web site for additional information.
+--      http://www.free-ip.com
+--
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+--
+----------------------------------------------------------------------------
+--  Microcode VHDL file for 6502 CPU.  Created by mcgen.exe
+----------------------------------------------------------------------------
+library ieee;
+use ieee.std_logic_1164.all;
+--use ieee.std_logic_arith.all;
+--use ieee.std_logic_unsigned.all;
+library work;
+
+package
+  microcode
+   is
+  constant reset_opcode :std_logic_vector (7 downto 0) := "00000011";
+  type MCT_DONE is (MC_NOP, MC_DONE);  -- 2 types
+  type MCT_ADDR_OP is (MC_NOP, MC_PC_P, MC_SPLIT, MC_SPLIT_X, MC_SPLIT_Y, MC_DIN_ZX, MC_DIN_ZXP, MC_DIN_Z, MC_DIN_ZP, MC_DINT16, MC_DINT16_X, MC_DINT1_Z, MC_DINT1_ZX, MC_V_IRQ1, MC_V_IRQ2, MC_SP, MC_SPLIT_P, MC_DIN_ZY, MC_V_RESET1, MC_V_RESET2, MC_V_NMI1, MC_V_NMI2);  -- 22 types
+  type MCT_DIN_LE is (MC_NOP, MC_EN);  -- 2 types
+  type MCT_RD_EN is (MC_NOP, MC_READ);  -- 2 types
+  type MCT_DOUT_OP is (MC_NOP, MC_DINT3, MC_PCH, MC_PCL, MC_P_REG, MC_A_REG, MC_X_REG, MC_Y_REG);  -- 8 types
+  type MCT_DINT1_OP is (MC_NOP, MC_DIN);  -- 2 types
+  type MCT_DINT2_OP is (MC_NOP, MC_DIN);  -- 2 types
+  type MCT_DINT3_OP is (MC_NOP, MC_ALU);  -- 2 types
+  type MCT_PC_OP is (MC_NOP, MC_INC, MC_BCC, MC_BCS, MC_BEQ, MC_BMI, MC_BNE, MC_BPL, MC_SPLIT, MC_BVC, MC_BVS);  -- 11 types
+  type MCT_SP_OP is (MC_NOP, MC_PUSH, MC_POP, MC_X_REG);  -- 4 types
+  type MCT_ALU1 is (MC_A_REG, MC_DIN, MC_X_REG, MC_Y_REG);  -- 4 types
+  type MCT_ALU2 is (MC_DIN, MC_ONE, MC_SP_REG);  -- 3 types
+  type MCT_ALU_OP is (MC_PASS1, MC_ADDC, MC_BIT_AND, MC_BIT_ASL, MC_SUB, MC_BIT_XOR, MC_ADD, MC_PASS2, MC_BIT_LSR, MC_BIT_OR, MC_BIT_ROL, MC_BIT_ROR, MC_SUBB);  -- 13 types
+  type MCT_A_LE is (MC_NOP, MC_LE);  -- 2 types
+  type MCT_X_LE is (MC_NOP, MC_LE);  -- 2 types
+  type MCT_Y_LE is (MC_NOP, MC_LE);  -- 2 types
+  type MCT_FLAG_OP is (MC_NOP, MC_NVZC, MC_NZ, MC_NZC, MC_BIT, MC_SETB, MC_SETI, MC_CLEARC, MC_CLEARD, MC_CLEARI, MC_CLEARV, MC_DIN, MC_SETC, MC_SETD);  -- 14 types
+
+  -- Microcode is approxamately 35 bits wide.
+
+
+  component mc_rom
+    port (opcode     :in std_logic_vector (7 downto 0);
+          step       :in std_logic_vector (2 downto 0);
+          DONE       :out MCT_DONE;
+          ADDR_OP    :out MCT_ADDR_OP;
+          DIN_LE     :out MCT_DIN_LE;
+          RD_EN      :out MCT_RD_EN;
+          DOUT_OP    :out MCT_DOUT_OP;
+          DINT1_OP   :out MCT_DINT1_OP;
+          DINT2_OP   :out MCT_DINT2_OP;
+          DINT3_OP   :out MCT_DINT3_OP;
+          PC_OP      :out MCT_PC_OP;
+          SP_OP      :out MCT_SP_OP;
+          ALU1       :out MCT_ALU1;
+          ALU2       :out MCT_ALU2;
+          ALU_OP     :out MCT_ALU_OP;
+          A_LE       :out MCT_A_LE;
+          X_LE       :out MCT_X_LE;
+          Y_LE       :out MCT_Y_LE;
+          FLAG_OP    :out MCT_FLAG_OP
+         );
+  end component;
+
+  component DONE_rom
+    port (addr       :in std_logic_vector (10 downto 0);
+          DONE       :out MCT_DONE
+         );
+  end component;
+
+  component ADDR_OP_rom
+    port (addr       :in std_logic_vector (10 downto 0);
+          ADDR_OP    :out MCT_ADDR_OP
+         );
+  end component;
+
+  component DIN_LE_rom
+    port (addr       :in std_logic_vector (10 downto 0);
+          DIN_LE     :out MCT_DIN_LE
+         );
+  end component;
+
+  component RD_EN_rom
+    port (addr       :in std_logic_vector (10 downto 0);
+          RD_EN      :out MCT_RD_EN
+         );
+  end component;
+
+  component DOUT_OP_rom
+    port (addr       :in std_logic_vector (10 downto 0);
+          DOUT_OP    :out MCT_DOUT_OP
+         );
+  end component;
+
+  component DINT1_OP_rom
+    port (addr       :in std_logic_vector (10 downto 0);
+          DINT1_OP   :out MCT_DINT1_OP
+         );
+  end component;
+
+  component DINT2_OP_rom
+    port (addr       :in std_logic_vector (10 downto 0);
+          DINT2_OP   :out MCT_DINT2_OP
+         );
+  end component;
+
+  component DINT3_OP_rom
+    port (addr       :in std_logic_vector (10 downto 0);
+          DINT3_OP   :out MCT_DINT3_OP
+         );
+  end component;
+
+  component PC_OP_rom
+    port (addr       :in std_logic_vector (10 downto 0);
+          PC_OP      :out MCT_PC_OP
+         );
+  end component;
+
+  component SP_OP_rom
+    port (addr       :in std_logic_vector (10 downto 0);
+          SP_OP      :out MCT_SP_OP
+         );
+  end component;
+
+  component ALU1_rom
+    port (addr       :in std_logic_vector (10 downto 0);
+          ALU1       :out MCT_ALU1
+         );
+  end component;
+
+  component ALU2_rom
+    port (addr       :in std_logic_vector (10 downto 0);
+          ALU2       :out MCT_ALU2
+         );
+  end component;
+
+  component ALU_OP_rom
+    port (addr       :in std_logic_vector (10 downto 0);
+          ALU_OP     :out MCT_ALU_OP
+         );
+  end component;
+
+  component A_LE_rom
+    port (addr       :in std_logic_vector (10 downto 0);
+          A_LE       :out MCT_A_LE
+         );
+  end component;
+
+  component X_LE_rom
+    port (addr       :in std_logic_vector (10 downto 0);
+          X_LE       :out MCT_X_LE
+         );
+  end component;
+
+  component Y_LE_rom
+    port (addr       :in std_logic_vector (10 downto 0);
+          Y_LE       :out MCT_Y_LE
+         );
+  end component;
+
+  component FLAG_OP_rom
+    port (addr       :in std_logic_vector (10 downto 0);
+          FLAG_OP    :out MCT_FLAG_OP
+         );
+  end component;
+
+end microcode;
+
+package body microcode is
+end microcode;
+
+
+

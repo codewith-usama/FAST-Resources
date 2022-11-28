@@ -1,0 +1,27 @@
+-- From VHDL Starter's Guide - Yalamanchili - p. 40
+
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+
+entity mux4 is
+
+  port (
+       In0, In1, In2, In3   : in    std_logic_vector(7 downto 0);
+       S0, S1 : in std_logic;
+	   Z : out std_logic_vector (7 downto 0)
+       );
+
+end mux4;
+
+architecture behavioral of mux4 is
+
+begin
+
+  Z <= In0 after 5ns when S0 = '0' and S1 = '0' else
+	   In1 after 5ns when S0 = '0' and S1 = '1' else
+	   In2 after 5ns when S0 = '1' and S1 = '0' else
+	   In3 after 5ns when S0 = '1' and S1 = '1' else
+	   "00000000" after 5ns;
+
+end behavioral;

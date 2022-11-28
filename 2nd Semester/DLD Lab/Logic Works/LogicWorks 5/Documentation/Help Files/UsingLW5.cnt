@@ -1,0 +1,18 @@
+1 Welcome to LogicWorks 5=Welcome@UsingLW5.hlp
+1 Upgrading from previous versions=Upgrading_from_previous_versions@UsingLW5.hlp
+1 What's new in version 5=Whats_new@UsingLW5.hlp
+1 Technical Support=Technical_Support@UsingLW5.hlp
+1 Tech Notes/FAQ
+2 Using Files from Pre-3.0 Macintosh Versions=Using_Macintosh_Files@UsingLW5.hlp
+2 Sharing File with LogicWorks for the Macintosh=Sharing_Macintosh@UsingLW5.hlp
+2 Curing Startup Error Message 59001=Startup_Error_59001@UsingLW5.hlp
+2 Symbols & Libraries
+3 Installing and Opening Symbol Libraries=Installing_Symbol_Libraries@UsingLW5.hlp
+3 Repairing Damaged Libraries=Repairing_Libraries@UsingLW5.hlp
+2 Simulation
+3 Creating a Subcircuit for a Device Using Model Wizard=Create_Subcircuit_Bottom_Up@UsingLW5.hlp
+3 Creating a Subcircuit Manually=Creating_a_Subcircuit_Manually@UsingLW5.hlp
+3 VHDL
+4 VHDL Implementation in LogicWorks 5=VHDL_Implementation@UsingLW5.hlp
+4 Using the writeln Function for Debugging VHDL=writeln@UsingLW5.hlp
+4 Interface Between VHDL and LogicWorks=Interface_VHDL_LogicWorks@UsingLW5.hlp

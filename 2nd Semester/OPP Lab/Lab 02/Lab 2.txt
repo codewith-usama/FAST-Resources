@@ -1,0 +1,410 @@
+Questions 1
+
+#include<iostream>
+using namespace std;
+float Residential()
+{
+	float Bill_processing_fee = 4.50;
+	float Basic_service_fee = 20.50;
+	float Premium_channels = 7.50; //per channel
+	int choice; 
+	float choice1;
+	cout << "Number of Premium channels: ";
+	cin >> choice;
+	choice1 = choice * 7.50;
+	return choice1;
+}
+int Busniess()
+{
+	float Bill_processing_fee = 15.00; //for first 10 connections, $5.00 for each additional connection
+	float service_fee  = 75.00;
+	float Premium_channels = 50.00; // per channel for any number of connections
+	int choice1, choice2;
+	float choice3;
+	cout << "Number of connections: ";
+	cin >> choice1;
+	if(choice1 > 10)
+	{
+		choice2 = choice1 - 10;
+		choice3 = (choice2 * 5) + 75;
+	}
+	int channel;
+	float channel1;
+	cout << "Number of Premium channels: ";
+	cin >> channel;
+	channel1 = channel * 50;
+	int total;
+	total = channel1 + choice3;
+	return total;
+}
+int main()
+{
+	int acc_no;
+	char code;
+	cout << "Enter Acount Number: ";
+	cin >> acc_no;
+	cout << "Customer Code\nResidential customer R/r \nBusiness customer B/b\nYour Choice:";
+	cin >> code;
+	
+	if(code == 'r' || code == 'R')
+	{
+		cout << "\nThe Amount of selected channels is: $"<<Residential();
+		cout << "\nThe Account Number is: "<<acc_no;
+
+	}
+	else if(code == 'b' || code == 'B')
+	{
+		cout << "\nThe Total Amount is: $"<<Busniess();
+		cout << "\nThe Account Number is: "<<acc_no;
+	}
+	else
+		cout << "Wrong code.";
+		
+}
+
+
+Questions 2
+
+#include<iostream>
+using namespace std;
+int showChoices()
+{
+	int choice;
+
+	cout << "\n1.Feet To Meter\n2.Inch To Cent";
+	cout << "\n3.Cent To Inch\n4.Meter To Feet\n";
+	cin >> choice;
+	return choice;
+
+}
+int feetAndInchesToMetersAndCent(int k)
+{
+	int a = 1;
+	
+	char j = 'y';
+	while(j == 'y')
+	{
+		if(k == 1)
+		{	
+			float var1, out;
+			cout << "\nFeet: ";
+			cin >> var1;
+			out = var1 * 0.3048;
+			cout << "In meter is: "<< out;
+			cout << "\nDo you want more convertion y/n: ";
+			cin >> j;
+			system("cls");
+		
+		if(j == 'y')
+			return a;
+			
+		else
+		break;
+		
+		}
+		else if(k == 2)
+		{
+			float var2, out1;
+			cout << "\nInch: ";
+			cin >> var2;
+			out1 = var2 * 2.54;
+			cout << "In Centi is: "<< out1;	
+			cout << "\nDo you want more convertion y/n: ";
+			cin >> j;
+			system("cls");		
+		if(j == 'y')
+			return a;
+			
+		else
+		break;
+		}
+	}
+	
+	
+	
+}
+int metersAndCentTofeetAndInches(int b)
+{
+	int a = 1;
+	
+	char j = 'y';
+	while(j == 'y')
+	{
+		if(b == 3)
+		{	
+			float var2, out1;
+			cout << "\nCenti: ";
+			cin >> var2;
+			out1 = var2 * 0.393701;
+			cout << "In Inch is: "<< out1;
+
+			cout << "\nDo you want more convertion y/n: ";
+			cin >> j;
+			system("cls");
+		if(j == 'y')
+			return a;
+		
+		else
+		break;
+		}
+		else if(b == 4)
+		{
+			float var, out;
+			cout << "\nMeter: ";
+			cin >> var;
+			out = var * 3.28084;
+			cout << "In Feet is: "<< out;		
+			
+			cout << "\nDo you want more convertion y/n: ";
+			cin >> j;
+			system("cls");
+		if(j == 'y')
+			return a;
+			
+		else
+		break;
+		}
+	}
+	
+}
+int main()
+{
+	int i;
+	int j = 1;
+
+	while(j == 1)
+	{
+		i = showChoices();
+		if(i == 1 || i == 2)
+		{
+			j = feetAndInchesToMetersAndCent(i);
+			if(j == 1)
+			continue;
+			else
+			break;	
+		}
+		else if(i == 3 || i == 4)
+		{
+			j = metersAndCentTofeetAndInches(i);
+			if(j == 1)
+			continue;
+			else
+			break;
+		}
+		else
+		cout << "\nWrong code.";
+		exit(1);
+		
+	}	
+}
+
+
+Question 3
+
+#include<iostream>
+using namespace std;
+float Regular_service()
+{
+	int number_of_min;
+	int store, store1;
+	float store2, store3;
+	cout << "Enter Number of min: ";
+	cin >> number_of_min;
+	if(number_of_min <= 50)
+	{
+		store = 10;
+		cout <<"Number of min used are: "<<number_of_min;
+		return store;
+	}
+	else
+		store1 = number_of_min - 50;
+		store2 = store1 * 0.20;
+		store3 = store2 + 10;
+		cout <<"Number of min used are: "<<number_of_min;
+		return store3;
+		
+		
+}
+float Premium_service()
+{
+	int number_of_min_day, number_of_min_night;
+	 
+	int store, store1, var, var2, zar;
+	
+	float store2, var1, var3, var4, zar1;
+	
+	cout << "Enter Number of min used in day: ";
+	cin >> number_of_min_day;
+	cout << "Enter Number of min used in night: ";
+	cin >> number_of_min_night;
+	
+	if(number_of_min_day <= 75)
+	{
+		if(number_of_min_night <= 100)
+		{
+			store = 25;
+			cout <<"\nNumber of min used during day: "<<number_of_min_day;
+			cout <<"\nNumber of min used during night: "<<number_of_min_night;
+			cout <<"\nTotal Number of min used are: "<<number_of_min_day + number_of_min_night;
+			return store;
+		}
+		else
+		{
+			store1 = number_of_min_night - 100;
+			store2 = (store1 * 0.05) + 25;
+			cout <<"\nNumber of min used during day: "<<number_of_min_day;
+			cout <<"\nNumber of min used during night: "<<number_of_min_night;
+			cout <<"\nTotal Number of min used are: "<<number_of_min_day + number_of_min_night;
+			return store2;
+		}
+	}
+	else
+	{
+		if(number_of_min_night > 100)
+		{
+			var = number_of_min_night - 100;
+			var1 = var * 0.05;
+			
+			var2 = number_of_min_day - 75;
+			var3 = var2 * 0.10;
+			
+			var4 = var1 + var3 + 25;
+			cout <<"\nNumber of min used during day: "<<number_of_min_day;
+			cout <<"\nNumber of min used during night: "<<number_of_min_night;
+			cout <<"\nTotal Number of min used are: "<<number_of_min_day + number_of_min_night;
+			return var4;
+		}
+		else
+		{
+			zar = number_of_min_day - 75;
+			zar1 = (zar * 0.10) + 25;
+			cout <<"\nNumber of min used during day: "<<number_of_min_day;
+			cout <<"\nNumber of min used during night: "<<number_of_min_night;
+			cout <<"\nTotal Number of min used are: "<<number_of_min_day + number_of_min_night;
+			return zar1; 
+		}
+	}
+}
+int main()
+{
+	string acc_no;
+	char service_code;
+	cout << "Enter Account Num: ";
+	getline(cin,acc_no);
+	float i, j;
+	cout << "Enter Service code\n1.Regular service R/r\n2.Premium service P/p\n";
+	cin >> service_code;
+	if(service_code == 'r' || service_code == 'R')
+	{
+		i = Regular_service();
+		cout << "\nAccount number is: "<<acc_no;
+		cout << "\nService is Regular.";
+		cout << "\nDue Amount is: $"<< i;
+	}
+	else if(service_code == 'p' || service_code == 'P')
+	{
+		j = Premium_service();
+		cout << "\nAccount number is: "<<acc_no;
+		cout << "\nService is Premium.";
+		cout << "\nDue Amount is: $"<< j;
+	}
+	else
+	cout << "Error.";
+}
+
+
+Question 4
+
+#include<iostream>
+#include<cmath>
+using namespace std;
+float radius(float a, float b, float c, float d);
+float distance(float i, float j, float k, float l);
+float circumference(float a);
+float area(float a);
+int main()
+{
+	float x1, x2, y1, y2;
+	cout << "Enter X1: ";
+	cin >> x1;
+	cout << "Enter Y1: ";
+	cin >> y1;
+	cout << "Enter X2: ";
+	cin >> x2;
+	cout << "Enter Y2: ";
+	cin >> y2;	
+	radius(x1, y1, x2, y2);
+}
+float distance(float i, float j, float k, float l)
+{
+	float a;
+	return sqrt(a = pow((k - i), 2) + pow((l - j), 2));
+}
+float radius(float a, float b, float c, float d)
+{
+	float r = distance(a, b, c, d);
+	cout << "The Radius is: "<< r;
+	cout << "\nThe Diameter is: "<< r * 2;
+	circumference(r);
+}
+float circumference(float a)
+{
+	float i = (2 * 3.1416) * a;
+	cout << "\nThe Circumference is: "<< i;
+	area(a);
+}
+float area(float i)
+{
+	float a = pow(i, 2) * 3.1416;
+	cout << "\nThe Area is: "<< a;
+}
+
+
+Question 5
+
+#include<iostream>
+using namespace std;
+float tax()
+{
+	int income;
+	float amount;
+	int time, rate;
+	cout << "Enter Income: ";
+	cin >> income;
+	cout << "Enter consulting time (min): ";
+	cin >> time;
+	cout << "Enter hourly rate: ";
+	cin >> rate;
+	
+	if(income <= 25000)
+	{
+		if(time > 30)
+		{
+			amount = rate * 0.40;
+			return amount;
+		}
+		else
+		{
+			cout << "Person has low income.";
+			exit(1);	
+		}
+	}
+	else
+	{
+		if(time <= 20)
+		{
+			cout << "Person has low income.";
+			exit(1);
+		}
+		else
+		{
+			amount = rate * 0.70;
+			return amount;
+		}
+	}
+	}
+int main()
+{
+	float i = tax();
+	cout << "\nThe billing Amount is: " << i;
+}

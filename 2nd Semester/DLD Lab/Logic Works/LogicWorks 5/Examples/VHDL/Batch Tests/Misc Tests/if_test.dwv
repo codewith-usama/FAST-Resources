@@ -1,0 +1,34 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity if_test is
+
+  port (
+       A   : in    std_logic;
+       B   : in    std_logic;
+       EN  : in    std_logic;
+	   Z : out std_logic_vector(0 to 3)
+       );
+
+end if_test;
+
+architecture behavioral of if_test is
+
+begin
+
+  process (A, B, EN)
+    variable ABAR, BBAR : std_logic;
+  begin
+    ABAR := not A;
+    BBAR := not B;
+    if EN = '1' then
+      Z(0) <= not (ABAR and BBAR);
+      Z(1) <= not (ABAR and B);
+      Z(2) <= not (A and BBAR);
+      Z(3) <= not (A and B);
+    else
+      Z <= "1111";
+    end if;
+  end process;
+
+end behavioral;

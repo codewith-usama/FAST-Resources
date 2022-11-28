@@ -1,0 +1,1 @@
+(D VH1(A IOPanel.Save @123"(P c:\dw4\debug\iopaneltest.html @17"(V SIG1:NAME clk))(S C:\DW5\DebugLW\Scripts\IOPanelDefault.html @17"(V SIG1:NAME clk)))(A Timing.Save @78"(D(V2)(D12371000000)(S(N1"d))(S(N3"clk))(A(N2"i1)(R2))(S(N1"q))(A(N2"o1)(R2)))))

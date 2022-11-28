@@ -1,0 +1,42 @@
+library IEEE;
+library LogicWorks;
+use IEEE.std_logic_1164.all;
+use IEEE.std_logic_arith.all; -- needed for type "unsigned" and arithmetic functions
+use LogicWorks.debug.all;
+
+entity mult32 is
+port (multiplicand, multiplier : in std_logic_vector(31 downto 0);
+     	product : out std_logic_vector (63 downto 0));
+end mult32;
+
+architecture behavioral of mult32 is
+constant module_delay: Time:= 10 ns; 
+begin
+	mult_process: process(multiplicand,multiplier) 
+	variable product_register : unsigned(64 downto 0);
+	variable multiplicand_register : unsigned(32 downto 0);
+	 
+	begin
+		multiplicand_register := unsigned('0' & multiplicand);
+		product_register := unsigned('0' & to_stdlogicvector(X"00000000") & multiplier);
+		-- writeln("product_register after concat ", product_register);
+		
+		--
+		-- repeated shift-and-add loop
+		--
+		for index in 1 to 32 loop
+			if product_register(0) = '1' then
+				product_register(64 downto 32) := product_register(64 downto 32) + multiplicand_register;
+				-- writeln(" after add - product_register ", product_register, "  multiplicand ", multiplicand_register);
+			end if;
+			
+			-- perform a right shift with zero fill 
+			product_register := '0' & product_register(64 downto 1);
+		end loop;
+		
+		-- write result to output port
+		product <= std_logic_vector(product_register(63 downto 0)) after module_delay;
+	 
+	end process mult_process;
+
+end behavioral;

@@ -1,0 +1,13 @@
+$I clk	$I reset	$I enable	$I d	$E q	$O q
+0	0	0	0	.DC
+1	0	1	0	0
+0	0	1	55	0
+1	0	1	55	55
+0	0	1	AA	55
+1	0	1	AA	AA
+0	0	0	0	AA
+1	0	0	EE	AA
+0	1	0	EE	0
+1	1	0	EE	0
+0	0	0	EE	0
+1	0	0	EE	0

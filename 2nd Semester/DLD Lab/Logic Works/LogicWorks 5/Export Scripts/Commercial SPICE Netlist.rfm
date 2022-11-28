@@ -1,0 +1,42 @@
+{
+  Copyright 2000 Capilano Computing Systems Ltd.
+}
+$NOTES
+This format generates a netlist for commericial SPICE packages from a LogicWorks circuit.  In this format, the signal names applied in the schematic are used to identify nodes in the netlist.
+
+To use numbered nodes in the netlist, use the Berkeley SPICE format.
+
+IMPORTANT:  Devices must be named in accordance with SPICE naming conventions, e.g. resistors must be named Rxxx, etc.
+
+
+Non-standard attribute fields required:
+
+Field name    Where     Usage
+
+Spice         Devices   Contains SPICE parameters
+Spice         Design    Contains extra lines to insert at the start of the netlist
+$END
+$COMPATIBLE(ba2521ab)
+$FIND $DEVICES $NOT &Spice
+$CHECK(Spice field missing in one or more devices!) $DEVICES
+$DEVPINSEQUENCE &PinSequence
+$FIND $DEVICES
+$CREATEREPORT($DESIGNNAME.CIR) $PROMPT
+$COMBDEVSOFF
+$DEVPINSEQUENCE &PinSequence
+$DESIGNNAME   $DATE   $TIME
+$SORT $DEVICES $DEVNAME
+$DEVPINFORMAT $SIGNAME
+*
+* The following lines are derived from the design's Spice attribute field.
+* To change these, deselect all circuit elements, select the Get Info command,
+* and click the Design Attributes button.
+*
+&Spice
+*
+* Following is the listing of all devices in the circuit and their SPICE parameters.
+* To set the SPICE parameters, right-click on a device and select the Attributes command.
+*
+$DEVICES$DEVNAME &(Spice.Pre) $PINS &Spice
+*
+.END

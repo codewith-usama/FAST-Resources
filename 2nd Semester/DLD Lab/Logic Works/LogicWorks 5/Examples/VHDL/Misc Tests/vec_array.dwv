@@ -1,0 +1,46 @@
+-- This example tests assigning to and extracting from arrays of bit vector
+-- by implementing a simple memory file
+
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+use ieee.std_logic_arith.all;
+
+library LogicWorks;
+use LogicWorks.debug.all;
+
+entity regfile is 
+
+ port(
+		clk	: in	std_logic;
+		wrt	: in	std_logic;
+		wd	: in	std_logic_vector(0 to 7);
+		rd	: out	std_logic_vector(0 to 7);
+		sel	: in	std_logic_vector(0 to 4)
+	);
+
+end regfile;
+
+
+architecture arch1 of regfile is
+
+  type mem_array is array(0 to 31) of std_logic_vector(0 to 7);
+
+signal regf: mem_array;
+begin
+  cproc: process(clk)
+     variable cselect : integer;
+  begin
+    if (clk'event and (clk = '1'))
+    then
+      cselect := to_integer(sel);
+      if (wrt = '1')
+     	then writeln("write to ", cselect);
+     	     regf(cselect) <=  wd after 1 ns;
+     	else writeln("read from ", cselect);
+     	     rd <= regf(cselect) after 1 ns;
+      end if;
+    end if;
+  end process;
+  
+end arch1;

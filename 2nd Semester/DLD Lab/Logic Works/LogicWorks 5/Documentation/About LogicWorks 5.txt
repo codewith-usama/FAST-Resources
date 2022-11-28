@@ -1,0 +1,63 @@
+*** LogicWorks 5 for Windows - 2003-12-15 ***
+
+This note contains general information on how to get support
+and assistance on LogicWorks 5
+
+IMPORTANT: FREE UPDATES!!!
+
+After installation, you should check our web site at www.logicworks5.com
+for a free update patch to the latest version.
+
+
+TECHNICAL SUPPORT
+
+Installation Support is available through the Pearson Higher Education
+Media Product Assistance Hotline at:
+
+  Tel: 1-800-677-6337 M-F (8:00AM to 5:00PM CST) 
+  Fax: 847-486-2595 
+  email: media.support@pearsoned.com
+
+For technical issues regarding program operation, contact your instructor
+or teaching assistant, or check the on-line help available on the
+LogicWorks On-line Support Page at:
+
+    http://www.logicworks5.com
+
+
+FREE UPGRADES, HELP, AND SUPPORT ON-LINE!
+
+Our LogicWorks Web Site is available for your use at:
+
+    http://www.logicworks5.com
+
+The site is being constantly expanded and gives you instant access to
+the latest version patches, FAQs, extra symbol libraries, optional add-ons,
+etc. Check back regularly, or sign up for our mailing list to
+be notified automatically when new stuff becomes available.
+
+
+CHANGES IN VERSION 5, RELATIVE TO 4
+
+- VHDL: LogicWorks now allows you to create simulation models using
+  a subset of the VHDL hardware description language.  Please note that
+  some parts of the language are not implemented in this version, so some
+  VHDL models created on other systems may not run in LogicWorks without
+  modification.  A separate ReadMe file provided with the package provides
+  more information on the specific limitations in this version.
+
+- Simulation values of signals can now be displayed directly on the
+  schematic diagram as the simulation progresses.
+
+- All simulation values now use real time units, e.g. nanoseconds.
+
+- IOPnael tool allows you to display and modify simulation values and
+  creae custom display panels for your models.
+
+- Many improvements to the symbol editor tool, including the ability to
+  automatically display pin names with each pin.
+
+- TestPanel module allows you to specify a program of input values to
+  apply to a circuit under test and compare the results to the expected values.
+
+- Many small new features and improvements.

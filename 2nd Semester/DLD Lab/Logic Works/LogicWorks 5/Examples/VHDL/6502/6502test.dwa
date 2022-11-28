@@ -1,0 +1,1 @@
+(D VH1(A Timing.Save @321"(D(V2)(R100000)(S(P0)(N3"clk))(S(P0)(N5"reset))(S(P0)(N6"irq_in))(S(P0)(N6"nmi_in))(A(N8"addr_pin))(A(N3"din))(A(N4"dout))(S(P0)(N7"dout_oe))(S(P0)(N6"we_pin))(S(P0)(N6"rd_pin))(S(P0)(N4"sync))(A(N10"stack_page))(A(N9"reg_a_out))(A(N9"reg_x_out))(A(N9"reg_y_out))(A(N10"reg_sr_out))(A(N10"reg_sp_out))(A(N10"reg_pc_out)))))

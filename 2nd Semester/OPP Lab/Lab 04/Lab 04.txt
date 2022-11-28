@@ -1,0 +1,348 @@
+Question 1
+#include<iostream>
+#include<cmath>
+using namespace std;
+class circle
+{
+	double radius;
+	public:
+		void getArea(double radius)
+		{
+			cout << "Radius is: " << pow(radius,2);
+		}
+		void getPerimeter(double radius)
+		{
+			cout << "\nPerimeter is: " << pow(radius,2) * 3.1416;
+		}
+		circle(double radius)
+		{
+			this->radius = radius;
+			getArea(radius);
+			getPerimeter(radius);
+		}
+		
+		
+};
+int main()
+{
+	double r;
+	cout << "Enter radius: ";
+	cin >> r;
+	circle ob(r);
+	
+}
+
+Question 2
+#include<iostream>
+/*In starting Account Balance is 0. You have to deposit some amount to withdraw.*/
+using namespace std;
+class Account
+{
+	double acc_balance;
+	public:
+		void setDeposit(double acc_balance)
+		{
+			this->acc_balance +=  acc_balance;
+			setDisplay(this->acc_balance);
+		}
+		void setWithdraw(double acc_balance)
+		{
+			if(this->acc_balance == acc_balance || this->acc_balance > acc_balance)
+			{
+				this->acc_balance -= acc_balance;
+				setDisplay(this->acc_balance);
+			}
+			else
+			cout << "Not enough balance to withdraw.";
+			
+		}
+		void setDisplay(double acc_balance)
+		{
+			cout <<"Current Balance is: "<<acc_balance;
+		}
+};
+int main()
+{
+	Account ob1;
+	int num;
+	
+	char ch = 'y';
+	double amount, amount1;
+	while(ch == 'y' || ch == 'Y')
+	{
+		cout << "1.Deposit\n2.Withdraw\n";
+		cin >> num;
+		if(num == 1)
+		{
+			cout << "Enter Amount to deposit: ";
+			cin >> amount;
+			ob1.setDeposit(amount);
+			cout << "\nMore transcition?? y/n ";
+			cin >> ch;
+			if(ch == 'n' || ch == 'N')
+				ch = 'n';
+		}
+		else if(num == 2)
+		{
+			cout << "Enter Amount to withdraw: ";
+			cin >> amount1;
+			ob1.setWithdraw(amount1);
+			cout << "\nMore transcition?? y/n ";
+			cin >> ch;
+			if(ch == 'n' || ch == 'N')
+				ch = 'n';
+		}
+		system("cls");
+	}
+	
+}
+
+Question 3
+#include<iostream>
+using namespace std;
+class Invoice
+{
+	string part_num;
+	string part_description;
+	int quantity_of_the_item;
+	double price_per_item;
+	public:
+		double getInvoiceAmount()
+		{
+			if(quantity_of_the_item < 0)
+				quantity_of_the_item = 0;
+			double amount = quantity_of_the_item * price_per_item;
+			return amount;
+		}
+		Invoice(string part_num, string part_description, int quantity_of_the_item, double price_per_item)
+		{
+			this->part_num = part_num;
+			this->part_description = part_description;
+			this->quantity_of_the_item = quantity_of_the_item;
+			this->price_per_item = price_per_item;
+			double amount = getInvoiceAmount();
+			if(amount < 0)
+				amount = 0;
+				cout << "The amount is "<<amount;	
+		}			
+};
+int main()
+{
+	string num, description;
+	int quantity;
+	double price;
+	cout << "Enter part num: ";
+	cin >> num;
+	cout << "Enter part description: ";
+	fflush(stdin);
+	getline(cin,description);
+	cout << "Enter quantity of items: ";
+	cin >> quantity;
+	cout << "Price of items: ";
+	cin >> price;
+	Invoice ob1(num, description, quantity, price);
+}
+
+Question 4
+#include<iostream>
+using namespace std;
+class shop
+{
+	public:
+	string author;
+	string title;
+	double price;
+	string publisher;
+	int stock;
+	
+		void get_bookinfo()
+		{
+			cout << "Enter author name: ";
+			fflush(stdin);
+			getline(cin,author);
+			cout << "Book title: ";
+			getline(cin,title);
+			cout << "Enter price: ";
+			cin >> price;
+			cout << "Enter publisher name: ";
+			fflush(stdin);
+			getline(cin,publisher);
+			cout << "Enter stock: ";
+			cin >> stock;
+		}
+};
+int main()
+{
+	int num, copies;
+	string title, author;
+	cout << "Enter number of books: ";
+	cin >> num;
+	shop ob1[num];
+	for(int i = 0; i < num; i++)
+	{
+		ob1[i].get_bookinfo();
+		system("cls");
+	}
+	cout << "Enter Author name: ";
+	fflush(stdin);
+	getline(cin,author);
+	cout << "Enter title name:";
+	getline(cin,title);
+	
+	for(int i = 0; i < num; i++)
+	{
+		if(author == ob1[i].author && title == ob1[i].title)
+		{
+			cout << "Book is avalaible.\n";
+			cout << "Enter Requested Copies: ";
+			cin >> copies;
+			if(copies <= ob1[i].stock)
+			{
+				cout << "\nBook author is " << ob1[i].author;
+				cout << "\nTitle is " << ob1[i].title;
+				cout << "\nPrice is " << ob1[i].price * copies;
+				cout << "\nPublisher of book is " << ob1[i].publisher;
+			}
+			else
+				cout << "Required copies not in stock.";
+				break;
+		}
+		else
+		cout << "Book not Available.";
+	}
+} 
+
+Question 5
+#include<iostream>
+#include<string.h>
+#include<conio.h>
+using namespace std;
+struct Menu_food
+{
+	string name;
+	double price;
+	char code;
+};
+struct Menu_drink
+{
+	string name;
+	double price;
+	char code;
+};	
+class CoffeeShop
+{
+//	Menu_food menu[4] = {{"1.Zinger", 350, 'z'}, {"2.Chicken Tikka", 500, 'c'}, {"3.Palao", 200, 'p'}, {"4.Pizza", 700, 'p'}};
+//	Menu_drink menu1[3] = {{"1.Tea", 150, 't'}, {"2.Soft drink", 170, 'd'}, {"Coffee", 250, 'c'}};
+	string name;
+	string order;
+	public:
+//	void add_order()
+//	{
+//		for(int i = 0; i < 6; i++)
+//		{
+//			order[i] = menu[i].name;
+//		}
+//	}	 
+	void fulfillOrder()
+	{
+		cout << "\nYour order is placed.\n";
+	}
+	int num, quan;
+	void food()
+	{
+		cout << "\n1.Zinger 350\n2.Chicken Tikka 500\n3.3.Palao 200\n4.Pizza 700\n";
+		cout << "Enter your order: ";
+		cin >> num;
+		cout << "Enter Quantity: ";
+		cin >> quan;
+		fulfillOrder();
+		add_order_food(num,quan);
+	}
+	void add_order_food(int num, int quan)
+	{
+		if(num == 1)
+		{
+			bill = 350 * quan;
+			cout << "Your Bill is Rs "<< bill;
+		}
+		else if(num == 2)
+		{
+			bill = 500 * quan;
+			cout << "Your bill is Rs "<< bill;
+		}
+		else if(num == 3)
+		{
+			bill = 200 * quan;
+			cout << "Your bill is Rs "<< bill;
+		}
+		else if(num == 4)
+		{
+			bill = 700 * quan;
+			cout << "Your bill is Rs "<< bill;
+		}
+	}
+	void drink()
+	{
+		cout << "\n1.Tea 150\n2.2.Soft drink 170\n3.Coffee 250\n";
+		cout << "Enter your code: ";
+		cin >> num;
+		cout << "Enter Quantity: ";
+		cin >> quan;
+		add_order(num, quan);
+		fulfillOrder();
+		
+	}
+	double bill = 0;
+	double add_order(int num, int quan)
+	{
+		if(num == 1)
+		{
+			bill = 150 * quan;
+			cout << "Your Bill is Rs "<< bill;
+			return bill;
+		}
+		else if(num == 2)
+		{
+			bill = 170 * quan;
+			cout << "Your bill is Rs "<< bill;
+			return bill;
+		}
+		else if(num == 3)
+		{
+			bill = 250 * quan;
+			cout << "Your bill is Rs "<< bill;
+			return bill;
+		}
+		
+	}
+	
+}; 
+int main()
+{
+	CoffeeShop ob1;
+	int num;
+	char ch = 'y';
+	while(ch == 'y')
+	{
+	cout << "Online Resturant Placement";
+	cout << "\n What do you want to order??\n1.Food items\n2.Drinks\n";
+	cin >> num;
+	if(num == 1)
+	{
+		ob1.food();
+	}
+	else if(num == 2)
+	{
+		ob1.drink();
+	}
+	else 
+	cout << "Wrong code Entered.";
+	cout << "\nWanna order y/n: ";
+	cin >> ch;
+	if(ch == 'n' || ch == 'N')
+		ch = 'n';
+	else
+	system("cls");
+	continue;
+	}
+}

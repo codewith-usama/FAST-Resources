@@ -1,0 +1,32 @@
+{
+    LogicWorks Report Form for Parts List
+    Copyright 2000 by Capilano Computing Systems
+}
+$NOTES
+This report produces a list of all the devices used in the current circuit.
+
+
+
+Attribute    Where    Description
+
+Value        Devices  The value for this device, used for discrete devices (capacitors, resistors, etc.).
+$END
+{
+---------------------------------------------------------------------
+}
+$CREATEREPORT($DESIGNNAME.Parts.txt) $PROMPT $CREATOR(ttxt)
+$COMPATIBLE(6829b70c)
+$COMBDEVSON
+$MAXITEMSPERLINE(8)
+$ASSIGNNAMES $DEVICES
+$CONTSTART(                                        )
+$SORT $DEVICES $TYPENAME $LEXICAL &Value
+$HEADER
+Circuit:	$DESIGNNAME
+Date:		$DATE - $TIME
+
+Device Type        Num. Used   Value    References
+
+$ENDHEADER
+$ROWS(50)
+$DEVICES$TYPENAME$COL(23)$COUNT$COL(32)&Value$COL(41)$DEVNAME

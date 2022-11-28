@@ -1,0 +1,140 @@
+*** LogicWorks 5 for Windows - Version History ***
+
+
+LogicWorks 5.0 b11 - 2004-04-06
+
+- System:	Change:	Switched to VS.NET & Stingray 8.0
+- System:	Change:	Removed extra update put in for panel refresh
+- System:	Added:	-hide command line option
+- Drawing:	Fixed:	Spelling error Picture Ojbect
+- System:	Fixed:	Better message on attempt to paste bitmap in foreign format (e.g. screen copy)
+- Timing:	Fixed:	Export Timing not working
+- Timing:	Fixed:	Copy timing data had incorrect values for $DELAY
+- Timing:	Added:	INI entry RetainTime
+- Simulator:Added:	Check for system memory < 10MB
+- Timing:	Fixed:	Horiz scroll bar 16-bit problem with large scroll ranges
+- Timing:	Fixed:	Trigger problems and re-implemented hold options
+- Simulator:Added:	Allow single step from stop
+- System:	Fixed:	Exception when clicking in dialog items (e.g. part preview window) when bar is floated (WinView::OnLButton)
+- Timing:	Added:	Print horizontal scaling options
+- Timing:	Added:	INI keyword DefaultGroupRadix
+- Timing:	Added:	Better SHIFT/CTRL selection in label area
+- VHSim:	Added:	Improved searching for models, look in doc directory
+- VHSim:	Added:	Give line number of signal definition in consistency warnings
+- VHSim:	Fixed:	Bug causing element index to be wrong when connecting to structural ports
+- Drawing:	Fixed:	Bug causing bomb when creating a new attribute table for design
+- VHSim:	Fixed:	Delete key not doing delete-forward if nothing selected
+
+
+
+LogicWorks 5.0b10
+
+- VTiming:  Fixed:  Add Automatically setting ignored
+- VTiming:	Fixed:	Error messages if timing window hidden
+- VTiming:	Added:	Show Simulator Tools command
+- Drawing:	Fixed:	Not saving signal values if simulator not running
+- Drawing:	Added:  Print & Print Setup in cct popup
+- Simulator:Added:	Triggers menu item
+- VTiming:	Fixed:	Losing groups on file load
+- Drawing:	Fixed:	Not saving initial signal values
+- VTiming:	Fixed:	Changed group values to upper case
+- VTiming:	Fixed:	Not using INI label background colour
+- VTiming:	Fixed:	Labels not updating on scroll
+- VTiming:	Fixed:	Strange colours in group value text
+- Drawing:	Fixed:	Not saving speed if RUN
+- VHSim:	Fixed:	VHDL/Run Simulation command not working
+- VHSim:	Added:	Allow comments in batch file  #  //  --
+- Drawing:	Fixed:	Display signal popup when the spine of a breakout is right-clicked
+- Simulator:Added:	INI file options for model folders
+- Simulator:Added:	Dialog to search for lost models on model open
+- Simulator:Added:	Look for test vectors for structural files when sim starts
+
+
+
+
+LogicWorks 5.0b9
+
+- Simulator:Fixed:	Problem creating relative model paths
+- VHSim:	Added:	Conversion from LW signal values to bit or stdbit
+- VHSim:	Added:	Handle non-constant signal array index for access or assignment
+- VHSim:	Added:	Handle array of boolean signals & function params
+- System:	Fixed:	Move to Shared Tab from private floating window not working
+- VHSim:	Added:	Handle TRUE & FALSE constants
+- VHSim:	Fixed:	BIT data type should only have values 0 and 1 (no U)
+- VHSim:	Added:	to_bit, to_bitvector, to_stdlogic, to_stdulogic, to_stdlogicvector, to_stdulogicvector
+- TestPanel:Fixed:	Fixed spreadsheet init problem that caused batch files not to work
+- IOPanel:	Fixed:	Improved initialization and clearing when opening & closing docs
+- System:	Fixed:	Required entry point in SHELL32.DLL not found pre-Win2000
+- VTiming:	Added:	Print & Print Setup in wave popup
+- VTiming:	Added:	Print time range options
+- VTiming:	Fixed:	Line and font scaling in printing
+- VTiming:	Fixed:  Retain time setting not stored or used
+
+
+
+
+LogicWorks 5.0b8
+
+- DevEditor: Fixed: Losing pin types when autocreate is run on an existing pin list
+- VTiming: Added:  Set radix for group value display
+- Librarian: Fixed: Hitting Enter caused the window to stop working
+- System:   Fixed: Use shortcut name and not target file name in Help Docs menu
+- System:	Fixed: Problem with "Close Current Tab" losing tab order and eventual bomb
+- PLA:      Fixed: Weirdness when editing a RAM with exactly 3 address lines
+- PLA:	    Fixed: Use rich edit for data entry so we can handle > 32K
+- VHSim:	Added: LENGTH attribute for arrays
+- VHSim:	Added: type conversions e.g. STD_LOGIC_VECTOR(x)
+- Librarian	Fixed: Wasn't recalculating checksum on Rename
+- VHSim:	Added: 80% of std_logic_arith
+- System:	Fixed: Nested examples not showing up in Examples dialog
+- System:	Added: File path variables %my documents% %program files% %windows% %desktop%
+- Simulator:Added: More warnings and checks when attaching a model
+- DevEditor:Added: Extract pins automatically when subcct attached
+- VHSim:	Added: Recognize VHDL files with other file extensions
+- Drawing:  Added: Double-click on text to open for editing
+- System:   Fixed: Problem with weird chars when editing multiline text
+- Drawing:  Fixed: Bad error message on trying to create too large a breakout
+- VHSim:    Fixed:	Problem with range types
+- VHSim:    Added:	NEXT statement
+- VTiming:  Fixed:	Import Timing bomb
+
+
+LogicWorks 5.0b7	- not released publicly
+LogicWorks 5.0b6	- not released publicly
+LogicWorks 5.0b5	- not released publicly
+LogicWorks 5.0b4	- not released publicly
+LogicWorks 5.0b3	- not released publicly
+
+LogicWorks 5.0b2	- first public release
+
+
+
+CHANGES IN VERSION 5, RELATIVE TO 4
+
+- VHDL: LogicWorks now allows you to create simulation models using
+  a subset of the VHDL hardware description language.  Please note that
+  some parts of the language are not implemented in this version, so some
+  VHDL models created on other systems may not run in LogicWorks without
+  modification.  A separate ReadMe file provided with the package provides
+  more information on the specific limitations in this version.
+
+- Simulation values of signals can now be displayed directly on the
+  schematic diagram as the simulation progresses.
+
+- All simulation values now use real time units, e.g. nanoseconds.
+
+- IOPnael tool allows you to display and modify simulation values and
+  creae custom display panels for your models.
+
+- Many improvements to the symbol editor tool, including the ability to
+  automatically display pin names with each pin.
+
+- TestPanel module allows you to specify a program of input values to
+  apply to a circuit under test and compare the results to the expected values.
+
+- Many small new features and improvements.
+
+
+
+LogicWorks is a trademark of Capilano Computing Systems Ltd.
+

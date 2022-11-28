@@ -1,0 +1,45 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity state_machine is
+	port(reset, clk, x : in std_logic;
+		z : out std_logic);
+end state_machine;
+
+
+
+architecture behavioral of state_machine is
+	type statetype is (state0, state1, state2, state3);
+	signal state : statetype := state0;
+	signal nextState : statetype := state1;
+begin
+
+	state_proc: process(state, x)
+	begin
+		case state is
+			when state0 =>
+				nextstate <= state1;
+			when state1 =>
+				nextstate <= state2;
+			when state2 =>
+				nextstate <= state3;
+			when state3 =>
+				nextstate <= state0;
+		end case;
+	end process state_proc;
+	
+	output_proc: process(clk)
+	begin
+		report("CHECKING CLOCK") severity note;
+		if clk = '1'
+		then
+			report("RISING CLOCK") severity note;
+			state <= nextstate;
+			z <= '1' after 1ns;
+		else
+			z <= '0' after 1ns;
+		end if;
+	end process output_proc;
+	
+end behavioral;
+	

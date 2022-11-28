@@ -1,0 +1,153 @@
+library ieee;
+use ieee.std_logic_1164.all;
+--use ieee.std_logic_arith.all;
+--use ieee.std_logic_unsigned.all;
+library work;
+use work.microcode.all;
+--use work.free_6502.all;
+
+
+entity core_6502_debug is
+  port (clk	 :in std_logic;
+        reset	 :in std_logic;
+        irq_in	 :in std_logic;
+        nmi_in	 :in std_logic;
+        addr_pin :out std_logic_vector (15 downto 0);
+        din	 :in  std_logic_vector (7 downto 0);
+        dout	 :out std_logic_vector (7 downto 0);
+        dout_oe  :out std_logic;
+        we_pin	 :out std_logic;
+        rd_pin	 :out std_logic;
+        sync	 :out std_logic;
+        stack_page	:in  std_logic_vector (7 downto 0);
+        reg_a_out	:out std_logic_vector (7 downto 0);
+        reg_x_out	:out std_logic_vector (7 downto 0);
+        reg_y_out	:out std_logic_vector (7 downto 0);
+        reg_sr_out	:out std_logic_vector (7 downto 0);
+        reg_sp_out	:out std_logic_vector (7 downto 0);
+        reg_pc_out	:out std_logic_vector (15 downto 0)
+       );
+end core_6502_debug;
+
+
+architecture core_6502_arch_debug of core_6502_debug is
+  -- Constants
+  constant reset_opcode :std_logic_vector (7 downto 0) := "00000011";
+  constant irq_opcode   :std_logic_vector (7 downto 0) := "01000011";
+  constant nmi_opcode   :std_logic_vector (7 downto 0) := "00110011";
+  constant vect_nmi1    :std_logic_vector (15 downto 0) := "1111111111111010";
+  constant vect_nmi2    :std_logic_vector (15 downto 0) := "1111111111111011";
+  constant vect_reset1  :std_logic_vector (15 downto 0) := "1111111111111100";
+  constant vect_reset2  :std_logic_vector (15 downto 0) := "1111111111111101";
+  constant vect_irq1    :std_logic_vector (15 downto 0) := "1111111111111110";
+  constant vect_irq2    :std_logic_vector (15 downto 0) := "1111111111111111";
+
+  -- Internal state info
+  type STATES is (RESET1, RESET2, FETCH, START_IRQ, START_NMI, RUN);
+  signal state :STATES;
+  signal step  :std_logic_vector (2 downto 0);
+
+  -- registered inputs
+  signal nmi_reg1	:std_logic;
+  signal nmi_reg2	:std_logic;
+  signal irq_reg	:std_logic;
+  signal data_in	:std_logic_vector (7 downto 0);
+
+  -- Microcode ROM outputs
+  signal done		:MCT_DONE;
+  signal addr_op	:MCT_ADDR_OP;
+  signal din_le		:MCT_DIN_LE;
+  signal rd_en      :MCT_RD_EN;
+  signal dout_op	:MCT_DOUT_OP;
+  signal dint1_op	:MCT_DINT1_OP;
+  signal dint2_op	:MCT_DINT2_OP;
+  signal dint3_op	:MCT_DINT3_OP;
+  signal pc_op		:MCT_PC_OP;
+  signal sp_op		:MCT_SP_OP;
+  signal alu1		:MCT_ALU1;
+  signal alu2		:MCT_ALU2;
+  signal alu_op		:MCT_ALU_OP;
+  signal a_le		:MCT_A_LE;
+  signal x_le		:MCT_X_LE;
+  signal y_le		:MCT_Y_LE;
+  signal flag_op	:MCT_FLAG_OP;
+
+  -- Internal registers
+  signal a_reg		:std_logic_vector (7 downto 0);
+  signal x_reg		:std_logic_vector (7 downto 0);
+  signal y_reg		:std_logic_vector (7 downto 0);
+  signal dint1		:std_logic_vector (7 downto 0);
+  signal dint2		:std_logic_vector (7 downto 0);
+  signal dint3		:std_logic_vector (7 downto 0);
+  signal opcode_reg	:std_logic_vector (7 downto 0);
+  signal sp		:std_logic_vector (7 downto 0);
+  signal pc		:std_logic_vector (15 downto 0);
+  signal n_flag		:std_logic;
+  signal v_flag		:std_logic;
+  signal b_flag		:std_logic;
+  signal d_flag		:std_logic;
+  signal i_flag		:std_logic;
+  signal z_flag		:std_logic;
+  signal c_flag		:std_logic;
+
+  -- Combinotorial signals
+  signal opcode		:std_logic_vector (7 downto 0);
+  signal alu_in1	:std_logic_vector (8 downto 0);
+  signal alu_in2	:std_logic_vector (8 downto 0);
+  signal alu_out	:std_logic_vector (8 downto 0);
+
+  signal alu_add	:std_logic_vector (8 downto 0);
+  signal alu_add_in2	:std_logic_vector (8 downto 0);
+  signal alu_add_cin	:std_logic;
+  
+  signal addr_out_d     :std_logic_vector(15 downto 0);
+
+  -- Misc signals
+  signal first_run	:std_logic;
+  signal fetch_d	:std_logic;
+  signal data_out	:std_logic_vector (7 downto 0);
+  signal data_oe	:std_logic;
+  signal addr_out	:std_logic_vector (15 downto 0);
+  signal we_out		:std_logic;
+  signal nmi_event	:std_logic;
+
+begin
+  -- Debug outputs
+  reg_a_out <= a_reg;
+  reg_x_out <= x_reg;
+  reg_y_out <= y_reg;
+  reg_sr_out <= n_flag & v_flag & '1' & b_flag & d_flag
+                & i_flag & z_flag & c_flag;
+  reg_sp_out <= sp;
+  reg_pc_out <= pc;
+
+
+  -- The sync output
+  process (clk, reset)
+  begin
+    if reset='1' then
+      sync <= '0';
+    elsif clk'event and clk='1' then
+      case state is
+        when RESET1 =>		sync <= '0';
+        when RESET2 =>		sync <= '0';
+        when FETCH =>		sync <= '0';
+        when START_IRQ =>	sync <= '0';
+        when START_NMI =>	sync <= '0';
+        when RUN =>
+            if done=MC_DONE then
+              if nmi_event='1' then
+                sync <= '0';
+              elsif i_flag='0' and irq_reg='1' then
+                sync <= '0';
+              else
+                sync <= '1';
+              end if;
+            end if;
+        when others =>  sync <= '0';	
+      end case;
+    end if;
+  end process;
+  
+
+end core_6502_arch_debug;

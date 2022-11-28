@@ -1,0 +1,28 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+
+ENTITY test IS
+
+PORT( 
+		   i   	: in    std_logic_vector(0 to 3);
+		   x	: in	bit;
+		   o  	: out   std_logic_vector(0 to 7)
+);
+
+END test;
+
+ARCHITECTURE behave OF test IS
+
+  signal s1 : bit_vector(0 to 7);
+  signal isx : bit;
+
+BEGIN
+
+	s1 <= to_bit(i(0)) & isx & to_bitvector(i(2 to 3))
+			& to_bit(i(0), x) & to_bitvector(i(1 to 3), x) AFTER 0.5 ps;
+	isx <= '1' when is_x(i(1)) else '0';
+
+	o <= to_stdlogic(s1(0)) & to_stdlogicvector(s1(1 to 7));
+	
+END; 

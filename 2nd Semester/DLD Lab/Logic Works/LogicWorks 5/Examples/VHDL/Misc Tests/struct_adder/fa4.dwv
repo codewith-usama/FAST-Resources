@@ -1,0 +1,46 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+library libs;
+use libs.adder_small.all;
+
+-- This file tests the following things in particular:
+--
+-- - reading an element from a symbol library that has its simulation defined in VHDL
+-- - connecting elements extracted from port vectors to structural and behavioural elements
+
+entity vhdl_fa4 is 
+ 
+ port(
+		a	: in	std_logic_vector(0 to 3);		-- test both directions for element extraction
+		b	: in	std_logic_vector(3 downto 0);
+		gg	: out	std_logic;
+		pp	: out	std_logic;
+		sum	: out	std_logic_vector(3 downto 0);
+		c_in	: in	std_logic;
+		c_out	: out	std_logic
+	);
+
+end vhdl_fa4;
+
+
+architecture arch1 of vhdl_fa4 is
+
+signal 	ci1, ci2, ci3, co3	: std_logic;
+signal 	p, g	: std_logic_vector (3 downto 0);
+
+begin
+	FA0: vhdl_fa port map(a=>a(3), b=>b(0), c_in=>c_in, c_out=>ci1, sum=>sum(0));
+	FA1: vhdl_fa port map(a=>a(2), b=>b(1), c_in=>ci1, c_out=>ci2, sum=>sum(1));
+	FA2: vhdl_fa port map(a=>a(1), b=>b(2), c_in=>ci2, c_out=>ci3, sum=>sum(2));
+	FA3: vhdl_fa port map(a=>a(0), b=>b(3), c_in=>ci3, c_out=>co3, sum=>sum(3));
+
+	p <= a or b after 1 ns;
+	pp <=  p(0) and p(1) and p(2) and p(3) after 1 ns;
+	
+	g <= a and b after 1 ns;
+	gg <= g(3) or (p(3) and g(2)) or (p(3) and p(2) and g(1)) or (p(3) and p(2) and p(1) and g(0)) after 2 ns;
+	
+
+	c_out <= ci3;
+
+end arch1;

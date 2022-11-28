@@ -1,0 +1,13 @@
+$I i1	$I i2	$I dosigned	$E plus	$E minus	$E mult	$O mult
+0	0	0	0	0	0
+0	1	0	1	ff	0
+1	1	0	2	0	1
+ff	ff	0	fe	0	fe01
+ff	ff	1	fe	0	1
+80	80	0	0	0	4000
+80	80	1	0	0	4000
+1	ff	1	0	2	ffff
+0	ff	1	ff	1	0
+1	ff	0	0	2	ff
+ff	1	0	0	fe	ff
+ff	1	1	0	fe	ffff

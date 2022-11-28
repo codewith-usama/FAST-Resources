@@ -1,0 +1,32 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_arith.all;
+use ieee.std_logic_unsigned.all;
+library work;
+use work.microcode.all;
+
+entity Y_LE_rom is
+    port (addr       :in std_logic_vector (10 downto 0);
+          Y_LE       :out MCT_Y_LE
+         );
+end Y_LE_rom;
+
+
+architecture Y_LE_rom_arch of Y_LE_rom is
+begin
+  process (addr)
+  begin
+    case addr is
+        when "10001000000" =>    Y_LE <= MC_LE;
+        when "11001000000" =>    Y_LE <= MC_LE;
+        when "10101100100" =>    Y_LE <= MC_LE;
+        when "10111100100" =>    Y_LE <= MC_LE;
+        when "10100000001" =>    Y_LE <= MC_LE;
+        when "10100100011" =>    Y_LE <= MC_LE;
+        when "10110100011" =>    Y_LE <= MC_LE;
+        when "10101000000" =>    Y_LE <= MC_LE;
+        when others =>    Y_LE <= MC_NOP;
+    end case;
+  end process;
+end Y_LE_rom_arch;
+

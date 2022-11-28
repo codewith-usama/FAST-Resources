@@ -1,0 +1,36 @@
+use work.bool_decl.all;
+
+entity bool_test is
+
+  port (
+       in1, in2  : in    bool_array;
+       in3, in4 : in boolean;
+       sel : in bool_sel;
+       out1   : out    bool_array;
+       out2   : out    boolean
+       );
+
+end bool_test;
+
+architecture behavioral of bool_test is
+begin
+  
+  with sel select
+  			out1 <= in1 and in2 when 0,
+  			        in1 nand in2 when 1,
+  			        in1 or in2 when 2,
+  			        in1 nor in2 when 3,
+  			        in1 xor in2 when 4,
+  			        in1 xnor in2 when 5,
+  			        in1 when others;
+
+  with sel select
+  			out2 <= in3 and in4 when 0,
+  			        in3 nand in4 when 1,
+  			        in3 or in4 when 2,
+  			        in3 nor in4 when 3,
+  			        in3 xor in4 when 4,
+  			        in3 xnor in4 when 5,
+  			        in3 when others;
+
+end behavioral;

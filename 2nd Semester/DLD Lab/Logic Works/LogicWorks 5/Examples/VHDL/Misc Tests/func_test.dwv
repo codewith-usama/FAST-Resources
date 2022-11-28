@@ -1,0 +1,69 @@
+library IEEE;
+library LogicWorks;
+use IEEE.std_logic_1164.all;
+use LogicWorks.debug.all;
+
+entity machine is
+	port(d, clk : in std_logic;
+		i1 : std_logic_vector(1 to 3);
+		q : out std_logic;
+		o1 : out std_logic_vector(1 to 3));
+end machine;
+
+
+
+architecture behavioral of machine is
+
+	impure function rising_edge
+				(signal clock : std_logic)
+		return boolean is
+	begin
+		return(clock = '1' and clock'event);
+	end rising_edge;
+	
+	function invert_vec(svalue : std_logic_vector)
+		return bit_vector is
+	variable outvalue : bit_vector(svalue'range);
+	variable sum : integer;
+	begin
+		assert sum = 0;
+		for i in 0 to 3
+		loop
+			sum := (sum * 4) + i;
+		end loop;
+		assert sum = 16#1b#;
+		
+		for i in 3 downto 0
+		loop
+			sum := (sum * 4) + i;
+		end loop;
+		
+		assert sum = 16#1be4#;
+		
+		for i in outvalue'range
+		loop
+			writeln("Loop ", i);
+			case svalue(i) is
+				when '0' => outvalue(i) := '1';
+				when '1' => outvalue(i) := '0';
+				when others => outvalue(i) := 'U';
+			end case;
+		end loop;
+		
+		writeln("Returning outvalue = ", outvalue);
+		
+		return outvalue;
+	end invert_vec;
+		
+begin
+
+	output_process: process(clk)
+	begin
+		writeln("Enter output_process at ", now());
+		o1 <= invert_vec(i1(3)&i1(1 to 2)) after 0.2 ns;
+		wait until(rising_edge(clk));		
+		q <= d after 0.5 ns;
+	end process output_process;
+	
+end behavioral;
+	

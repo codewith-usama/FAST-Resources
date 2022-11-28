@@ -1,0 +1,23 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity state_machine is
+	port(reset, clk, x : in std_logic;
+		z : out std_logic);
+end state_machine;
+
+
+
+architecture behavioral of state_machine is
+	type statetype is (state0, state1, state2, state3);
+	signal state : statetype := state0;
+	signal nextState : statetype := state1;
+begin
+
+	b1: block(x = '0') is
+		begin
+		  state <= guarded nextState after 1ns;
+		end block b1;
+	
+end behavioral;
+	

@@ -1,0 +1,36 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_arith.all;
+use ieee.std_logic_unsigned.all;
+library work;
+use work.microcode.all;
+
+entity DINT2_OP_rom is
+    port (addr       :in std_logic_vector (10 downto 0);
+          DINT2_OP   :out MCT_DINT2_OP
+         );
+end DINT2_OP_rom;
+
+
+architecture DINT2_OP_rom_arch of DINT2_OP_rom is
+begin
+  process (addr)
+  begin
+    case addr is
+        when "00001110010" =>    DINT2_OP <= MC_DIN;
+        when "00011110010" =>    DINT2_OP <= MC_DIN;
+        when "11001110010" =>    DINT2_OP <= MC_DIN;
+        when "11011110010" =>    DINT2_OP <= MC_DIN;
+        when "11101110010" =>    DINT2_OP <= MC_DIN;
+        when "11111110010" =>    DINT2_OP <= MC_DIN;
+        when "01001110010" =>    DINT2_OP <= MC_DIN;
+        when "01011110010" =>    DINT2_OP <= MC_DIN;
+        when "00101110010" =>    DINT2_OP <= MC_DIN;
+        when "00111110010" =>    DINT2_OP <= MC_DIN;
+        when "01101110010" =>    DINT2_OP <= MC_DIN;
+        when "01111110010" =>    DINT2_OP <= MC_DIN;
+        when others =>    DINT2_OP <= MC_NOP;
+    end case;
+  end process;
+end DINT2_OP_rom_arch;
+

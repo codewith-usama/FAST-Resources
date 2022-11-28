@@ -1,0 +1,109 @@
+library LogicWorks;
+use LogicWorks.Debug.all;
+
+
+entity machine is
+	port(write, data : in boolean;
+		 addr : in integer;
+		 z : out boolean;
+		 cnt : out integer);
+end machine;
+
+
+architecture behavioral of machine is
+
+  	type bool_array is array(0 to 7) of boolean;
+  	type bool_array1 is array(0 to 3) of boolean;
+
+	pure function rising_edge
+				(signal clock : boolean)
+		return boolean is
+	begin
+		return(clock and clock'event);
+	end rising_edge;
+	
+	-- test passing boolean array as constant
+	
+	function count_ones_const(svalue : bool_array)
+		return integer is
+	variable sum : integer;
+	begin
+		assert sum = 0;		
+		for i in svalue'range
+		loop
+			if svalue(i)
+			then sum := sum + 1;
+			end if;
+		end loop;
+		
+		return sum;
+	end count_ones;
+
+
+	-- test passing boolean array as signal reference
+	
+	function count_ones(signal svalue : bool_array)
+		return integer is
+	variable sum, sum1 : integer;
+	variable a : bool_array;
+	variable b : bool_array;
+	begin
+		a := (true, false, false, true, true, true, true, true);
+		for i in b'range
+		loop
+			b(i) := not a(i);
+		end loop;
+		writeln("b = ", b);
+		assert b = (false, true, true, false, false, false, false, false);
+		
+		b := svalue;			-- test access to full vector
+		assert b = svalue;
+		
+		assert sum = 0;	
+		for i in svalue'range
+		loop
+			if svalue(i)		-- test access to vector element
+			then sum := sum + 1;
+			end if;
+		end loop;
+		
+		assert sum1 = 0;	
+		for i in b'range
+		loop
+			if b(i)		-- test access to vector element
+			then sum1 := sum1 + 1;
+			end if;
+		end loop;
+		
+		assert sum = count_ones_const(svalue);	-- check both versions get the same result
+		assert sum = sum1;
+		
+		return sum;
+	end count_ones;
+
+	signal ba : bool_array;
+	signal bb : bool_array1;
+
+begin
+
+	process(write, data, addr)
+	variable a : integer;
+	begin
+		a := addr mod 8;
+		
+		if (rising_edge(write))
+		then writeln("Got rising edge");
+		end if;
+		
+		if (write)
+		then ba(a) <= data;
+		end if;
+		
+	end process;
+	
+	bb <= ba(addr to addr+3) when addr <= 4 else ba(0 to 3);
+	cnt <= count_ones(ba);
+	z <= ba(addr mod 8);
+
+end behavioral;
+	

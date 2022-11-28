@@ -1,0 +1,20 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity bus_test is
+
+  port (
+       In0   : in    std_logic_vector(0 to 1);
+       In1   : in    std_logic_vector(0 to 1);
+	   Z : out std_logic_vector(0 to 1)
+       );
+
+end bus_test;
+
+architecture behavioral of bus_test is
+
+begin
+
+  Z <= "01" after 1ns, "11" after 1.5ns when In0 = In1 else "10" after 2ns;
+
+end behavioral;

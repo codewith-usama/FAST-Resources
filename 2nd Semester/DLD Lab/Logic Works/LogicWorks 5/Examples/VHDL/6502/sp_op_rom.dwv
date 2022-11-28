@@ -1,0 +1,44 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_arith.all;
+use ieee.std_logic_unsigned.all;
+library work;
+use work.microcode.all;
+
+entity SP_OP_rom is
+    port (addr       :in std_logic_vector (10 downto 0);
+          SP_OP      :out MCT_SP_OP
+         );
+end SP_OP_rom;
+
+
+architecture SP_OP_rom_arch of SP_OP_rom is
+begin
+  process (addr)
+  begin
+    case addr is
+        when "00000000010" =>    SP_OP <= MC_PUSH;
+        when "00000000011" =>    SP_OP <= MC_PUSH;
+        when "00000000100" =>    SP_OP <= MC_PUSH;
+        when "00100000001" =>    SP_OP <= MC_PUSH;
+        when "00100000010" =>    SP_OP <= MC_PUSH;
+        when "01001000000" =>    SP_OP <= MC_PUSH;
+        when "00001000000" =>    SP_OP <= MC_PUSH;
+        when "01101000000" =>    SP_OP <= MC_POP;
+        when "00101000000" =>    SP_OP <= MC_POP;
+        when "01000000000" =>    SP_OP <= MC_POP;
+        when "01000000001" =>    SP_OP <= MC_POP;
+        when "01000000010" =>    SP_OP <= MC_POP;
+        when "01100000000" =>    SP_OP <= MC_POP;
+        when "01100000001" =>    SP_OP <= MC_POP;
+        when "01000011010" =>    SP_OP <= MC_PUSH;
+        when "01000011011" =>    SP_OP <= MC_PUSH;
+        when "01000011100" =>    SP_OP <= MC_PUSH;
+        when "00110011010" =>    SP_OP <= MC_PUSH;
+        when "00110011011" =>    SP_OP <= MC_PUSH;
+        when "00110011100" =>    SP_OP <= MC_PUSH;
+        when "10011010000" =>    SP_OP <= MC_X_REG;
+        when others =>    SP_OP <= MC_NOP;
+    end case;
+  end process;
+end SP_OP_rom_arch;

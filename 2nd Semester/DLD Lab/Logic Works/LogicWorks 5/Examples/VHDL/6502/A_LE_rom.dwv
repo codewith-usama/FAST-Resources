@@ -1,0 +1,79 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_arith.all;
+use ieee.std_logic_unsigned.all;
+library work;
+use work.microcode.all;
+
+entity A_LE_rom is
+    port (addr       :in std_logic_vector (10 downto 0);
+          A_LE       :out MCT_A_LE
+         );
+end A_LE_rom;
+
+
+architecture A_LE_rom_arch of A_LE_rom is
+begin
+  process (addr)
+  begin
+    case addr is
+        when "01101101100" =>    A_LE <= MC_LE;
+        when "01111101100" =>    A_LE <= MC_LE;
+        when "01111001100" =>    A_LE <= MC_LE;
+        when "01101001001" =>    A_LE <= MC_LE;
+        when "01100001110" =>    A_LE <= MC_LE;
+        when "01110001110" =>    A_LE <= MC_LE;
+        when "01100101011" =>    A_LE <= MC_LE;
+        when "01110101011" =>    A_LE <= MC_LE;
+        when "00101101100" =>    A_LE <= MC_LE;
+        when "00111101100" =>    A_LE <= MC_LE;
+        when "00111001100" =>    A_LE <= MC_LE;
+        when "00101001001" =>    A_LE <= MC_LE;
+        when "00100001110" =>    A_LE <= MC_LE;
+        when "00110001110" =>    A_LE <= MC_LE;
+        when "00100101011" =>    A_LE <= MC_LE;
+        when "00110101011" =>    A_LE <= MC_LE;
+        when "00001010000" =>    A_LE <= MC_LE;
+        when "01001101100" =>    A_LE <= MC_LE;
+        when "01011101100" =>    A_LE <= MC_LE;
+        when "01011001100" =>    A_LE <= MC_LE;
+        when "01001001001" =>    A_LE <= MC_LE;
+        when "01000001110" =>    A_LE <= MC_LE;
+        when "01010001110" =>    A_LE <= MC_LE;
+        when "01000101011" =>    A_LE <= MC_LE;
+        when "01010101011" =>    A_LE <= MC_LE;
+        when "10101101100" =>    A_LE <= MC_LE;
+        when "10111101100" =>    A_LE <= MC_LE;
+        when "10111001100" =>    A_LE <= MC_LE;
+        when "10101001001" =>    A_LE <= MC_LE;
+        when "10100101011" =>    A_LE <= MC_LE;
+        when "10100001110" =>    A_LE <= MC_LE;
+        when "10110001110" =>    A_LE <= MC_LE;
+        when "10110101011" =>    A_LE <= MC_LE;
+        when "01001010000" =>    A_LE <= MC_LE;
+        when "00001101100" =>    A_LE <= MC_LE;
+        when "00011101100" =>    A_LE <= MC_LE;
+        when "00011001100" =>    A_LE <= MC_LE;
+        when "00001001001" =>    A_LE <= MC_LE;
+        when "00000001110" =>    A_LE <= MC_LE;
+        when "00010001110" =>    A_LE <= MC_LE;
+        when "00000101011" =>    A_LE <= MC_LE;
+        when "00010101011" =>    A_LE <= MC_LE;
+        when "01101000011" =>    A_LE <= MC_LE;
+        when "00101010000" =>    A_LE <= MC_LE;
+        when "01101010000" =>    A_LE <= MC_LE;
+        when "11101101100" =>    A_LE <= MC_LE;
+        when "11111101100" =>    A_LE <= MC_LE;
+        when "11111001100" =>    A_LE <= MC_LE;
+        when "11101001001" =>    A_LE <= MC_LE;
+        when "11100001110" =>    A_LE <= MC_LE;
+        when "11110001110" =>    A_LE <= MC_LE;
+        when "11100101011" =>    A_LE <= MC_LE;
+        when "11110101011" =>    A_LE <= MC_LE;
+        when "10001010000" =>    A_LE <= MC_LE;
+        when "10011000000" =>    A_LE <= MC_LE;
+        when others =>    A_LE <= MC_NOP;
+    end case;
+  end process;
+end A_LE_rom_arch;
+

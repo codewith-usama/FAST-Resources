@@ -1,0 +1,56 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_arith.all;
+use ieee.std_logic_unsigned.all;
+library work;
+use work.microcode.all;
+use work.all; -- CD
+
+entity mc_rom is
+    port (opcode     :in std_logic_vector (7 downto 0);
+          step       :in std_logic_vector (2 downto 0);
+          DONE       :out MCT_DONE;
+          ADDR_OP    :out MCT_ADDR_OP;
+          DIN_LE     :out MCT_DIN_LE;
+          RD_EN      :out MCT_RD_EN;
+          DOUT_OP    :out MCT_DOUT_OP;
+          DINT1_OP   :out MCT_DINT1_OP;
+          DINT2_OP   :out MCT_DINT2_OP;
+          DINT3_OP   :out MCT_DINT3_OP;
+          PC_OP      :out MCT_PC_OP;
+          SP_OP      :out MCT_SP_OP;
+          ALU1       :out MCT_ALU1;
+          ALU2       :out MCT_ALU2;
+          ALU_OP     :out MCT_ALU_OP;
+          A_LE       :out MCT_A_LE;
+          X_LE       :out MCT_X_LE;
+          Y_LE       :out MCT_Y_LE;
+          FLAG_OP    :out MCT_FLAG_OP
+         );
+end mc_rom;
+
+
+architecture mc_rom_arch of mc_rom is
+  signal addr :std_logic_vector (10 downto 0);
+begin
+
+  addr <= opcode & step;
+
+  U00: DONE_rom port map (addr, DONE);
+  U01: ADDR_OP_rom port map (addr, ADDR_OP);
+  U02: DIN_LE_rom port map (addr, DIN_LE);
+  U03: RD_EN_rom port map (addr, RD_EN);
+  U04: DOUT_OP_rom port map (addr, DOUT_OP);
+  U05: DINT1_OP_rom port map (addr, DINT1_OP);
+  U06: DINT2_OP_rom port map (addr, DINT2_OP);
+  U07: DINT3_OP_rom port map (addr, DINT3_OP);
+  U08: PC_OP_rom port map (addr, PC_OP);
+  U09: SP_OP_rom port map (addr, SP_OP);
+  U10: ALU1_rom port map (addr, ALU1);
+  U11: ALU2_rom port map (addr, ALU2);
+  U12: ALU_OP_rom port map (addr, ALU_OP);
+  U13: A_LE_rom port map (addr, A_LE);
+  U14: X_LE_rom port map (addr, X_LE);
+  U15: Y_LE_rom port map (addr, Y_LE);
+  U16: FLAG_OP_rom port map (addr, FLAG_OP);
+end mc_rom_arch;

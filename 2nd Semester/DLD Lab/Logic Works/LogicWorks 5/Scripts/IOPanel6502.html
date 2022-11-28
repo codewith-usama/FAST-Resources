@@ -1,0 +1,92 @@
+<HTML>
+<BODY>
+
+
+<form name="reg_values">
+
+  <table>
+    <tr>
+      <td>Register A</td>
+      <td>
+        <input type="text" MAXLENGTH=22   name="RegA">
+      </td>
+    </tr>
+
+    <tr>
+      <td>Status</td>
+      <td>
+        <input type="text" MAXLENGTH=22   name="Status">
+      </td>
+    </tr>
+
+    <tr>
+      <td>Register X</td>
+      <td>
+        <input type="text" MAXLENGTH=22   name="RegX">
+      </td>
+    </tr>
+
+    <tr>
+      <td>Register Y</td>
+      <td>
+        <input type="text" MAXLENGTH=22   name="RegY">
+      </td>
+    </tr>
+
+    <tr>
+      <td>PC</td>
+      <td>
+        <input type="text" MAXLENGTH=22   name="RegPC">
+      </td>
+    </tr>
+
+    <tr>
+      <td>SP</td>
+      <td>
+        <input type="text" MAXLENGTH=22   name="RegSP">
+      </td>
+    </tr>
+
+    <tr>
+      <td>Addr Out</td>
+      <td>
+        <input type="text" MAXLENGTH=22   name="Addr">
+      </td>
+    </tr>
+
+    <tr>
+      <td>State</td>
+      <td>
+        <input type="text" MAXLENGTH=22   name="State">
+      </td>
+    </tr>
+  </table>
+</form>
+
+
+<SCRIPT>
+<!--
+
+function onsiminit(panel)
+{
+	panel.displayValue("a_reg", reg_values.RegA);
+	panel.displayValue("x_reg", reg_values.RegX);
+	panel.displayValue("y_reg", reg_values.RegY);
+	panel.displayValue("pc", reg_values.RegPC);
+	panel.displayValue("sp", reg_values.RegSP);
+	panel.displayValue("addr_pin", reg_values.Addr);
+	panel.displayValue("reg_sr_out", reg_values.Status);
+	panel.displayValue("state", reg_values.State);
+}
+
+function onsimstep(panel)
+{
+}
+
+-->
+</SCRIPT>
+
+
+</BODY>
+</HTML>
+

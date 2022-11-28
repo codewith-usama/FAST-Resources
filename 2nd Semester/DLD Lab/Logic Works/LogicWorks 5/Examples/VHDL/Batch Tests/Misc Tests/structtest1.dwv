@@ -1,0 +1,46 @@
+USE work.structtest1sub;
+
+ENTITY n1 IS
+
+PORT( 
+		   i         : in    bit_vector(0 to 1);
+		   o         : out   bit_vector(0 to 1)
+);
+
+END n1;
+
+ARCHITECTURE behave OF n1 IS
+
+  component structtest1sub
+    port (
+		   i         : in    bit;
+		   o         : out   bit
+         );
+  end component;
+  signal asig0 : bit;
+  signal asig1 : bit;
+  signal bsig0 : bit;
+  signal bsig1 : bit;
+
+BEGIN
+
+	bsig0 <= asig1 AFTER 1ns;
+	bsig1 <= asig0 AFTER 1ns;
+	not1n10 : structtest1sub port map(
+					 i => i(0),
+					 o => asig0
+					 );
+	not1n11 : structtest1sub port map(
+					 i => i(1),
+					 o => asig1
+					 );
+	not2n10 : structtest1sub port map(
+					 i => bsig0,
+					 o => o(0)
+					 );
+	not2n11 : structtest1sub port map(
+					 i => bsig1,
+					 o => o(1)
+					 );
+
+END; 

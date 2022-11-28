@@ -1,0 +1,24 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity expr_test is
+
+  port (
+       In0   : in    std_logic_vector(0 to 1);
+       In1   : in    std_logic_vector(0 to 1);
+	   Z : out std_logic_vector(0 to 1)
+       );
+
+end expr_test;
+
+architecture behavioral of expr_test is
+  constant c1 : time := 1ns;
+  constant c2 : std_logic := '0';
+  signal x1 : std_logic_vector(0 to 7) := to_stdlogicvector(x"a5");
+begin
+  
+  with x1 select
+  Z <= In0 after 1ns when "00000000",
+       In1 after 1ns when others;
+
+end behavioral;

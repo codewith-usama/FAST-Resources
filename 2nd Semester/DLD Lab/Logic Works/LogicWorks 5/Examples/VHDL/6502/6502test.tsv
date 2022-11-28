@@ -1,0 +1,21 @@
+$I reset	$I clk	$I din	$O step	$O sync	$O rd_pin	$O we_pin	$O addr_out	$O dout_oe	$O dout	$O reg_pc_out	$O reg_a_out	$O reg_x_out
+1	.C	55
+1	.C	55
+1	.C	55
+0	.C	55
+0	.C	55
+0	.C	55
+0	.C	20
+0	.C	01
+0	.C	55
+0	.C	55
+0	.C	E8
+0	.C	55
+0	.C	E8
+0	.C	55
+0	.C	AD
+0	.C	55
+0	.C	44
+0	.C	55
+0	.C	EA
+0	.C

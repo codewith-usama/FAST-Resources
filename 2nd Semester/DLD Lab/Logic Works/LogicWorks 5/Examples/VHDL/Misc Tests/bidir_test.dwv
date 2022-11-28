@@ -1,0 +1,41 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+
+entity bidir_test is 
+
+ port(
+		A	: inout	std_logic;
+		B	: inout	std_logic;
+		ENA	: in	std_logic;
+		ENB	: in	std_logic
+	);
+
+end bidir_test;
+
+
+architecture arch1 of bidir_test is
+
+begin
+
+  process(A, ENB)
+  begin
+    if ENB = '1'
+    then
+      B <= A;
+    else
+      B <= 'Z';
+    end if;
+  end process;
+  
+  process(B, ENA)
+  begin
+    if ENA = '1'
+    then
+      A <= B;
+    else
+      A <= 'Z';
+    end if;
+  end process;
+  
+end arch1;

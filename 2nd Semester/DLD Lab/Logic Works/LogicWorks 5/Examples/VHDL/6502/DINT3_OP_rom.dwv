@@ -1,0 +1,47 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_arith.all;
+use ieee.std_logic_unsigned.all;
+library work;
+use work.microcode.all;
+
+entity DINT3_OP_rom is
+    port (addr       :in std_logic_vector (10 downto 0);
+          DINT3_OP   :out MCT_DINT3_OP
+         );
+end DINT3_OP_rom;
+
+
+architecture DINT3_OP_rom_arch of DINT3_OP_rom is
+begin
+  process (addr)
+  begin
+    case addr is
+        when "00001110100" =>    DINT3_OP <= MC_ALU;
+        when "00011110100" =>    DINT3_OP <= MC_ALU;
+        when "00000110011" =>    DINT3_OP <= MC_ALU;
+        when "00010110011" =>    DINT3_OP <= MC_ALU;
+        when "11001110100" =>    DINT3_OP <= MC_ALU;
+        when "11011110100" =>    DINT3_OP <= MC_ALU;
+        when "11000110011" =>    DINT3_OP <= MC_ALU;
+        when "11010110011" =>    DINT3_OP <= MC_ALU;
+        when "11101110100" =>    DINT3_OP <= MC_ALU;
+        when "11111110100" =>    DINT3_OP <= MC_ALU;
+        when "11100110011" =>    DINT3_OP <= MC_ALU;
+        when "11110110011" =>    DINT3_OP <= MC_ALU;
+        when "01001110100" =>    DINT3_OP <= MC_ALU;
+        when "01011110100" =>    DINT3_OP <= MC_ALU;
+        when "01000110011" =>    DINT3_OP <= MC_ALU;
+        when "01010110011" =>    DINT3_OP <= MC_ALU;
+        when "00101110100" =>    DINT3_OP <= MC_ALU;
+        when "00111110100" =>    DINT3_OP <= MC_ALU;
+        when "00100110011" =>    DINT3_OP <= MC_ALU;
+        when "00110110011" =>    DINT3_OP <= MC_ALU;
+        when "01101110100" =>    DINT3_OP <= MC_ALU;
+        when "01111110100" =>    DINT3_OP <= MC_ALU;
+        when "01100110011" =>    DINT3_OP <= MC_ALU;
+        when "01110110011" =>    DINT3_OP <= MC_ALU;
+        when others =>    DINT3_OP <= MC_NOP;
+    end case;
+  end process;
+end DINT3_OP_rom_arch;

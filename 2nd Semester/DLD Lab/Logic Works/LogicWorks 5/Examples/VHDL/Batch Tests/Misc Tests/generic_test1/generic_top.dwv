@@ -1,0 +1,56 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+use work.all;
+
+
+entity generic_top is 
+
+ generic(n : positive:=2);
+ port(
+		clk	: in	std_logic;
+		reset	: in	std_logic;
+		enable	: in	std_logic;
+		d	: in std_logic_vector(n-1 downto 0);
+		q	: out std_logic_vector(n-1 downto 0)
+	);
+
+end generic_top;
+
+
+architecture behavioral of generic_top is
+
+	component generic_reg
+	
+	 generic(n : positive:=2);
+	 port(
+			clk	: in	std_logic;
+			reset	: in	std_logic;
+			enable	: in	std_logic;
+			d	: in std_logic_vector(n-1 downto 0);
+			q	: out std_logic_vector(n-1 downto 0)
+		);
+	
+	end component;
+
+  	signal int : std_logic_vector(n-1 downto 0);
+
+begin
+
+	r1 : generic_reg generic map (n => 8)
+					 port map(
+					 clk => clk,
+					 reset => reset,
+					 enable => enable,
+					 d => d,
+					 q => int
+					 );
+	r2 : generic_reg generic map (n => 8)
+					 port map(
+					 clk => clk,
+					 reset => reset,
+					 enable => enable,
+					 d => int,
+					 q => q
+					 );
+
+end behavioral;

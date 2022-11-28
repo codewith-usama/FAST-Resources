@@ -1,0 +1,25 @@
+ENTITY proc_test IS
+
+PORT( 
+		   i         : in    bit;
+		   o1        : out   bit;
+		   o2        : out   bit
+);
+
+END proc_test;
+
+ARCHITECTURE behave OF proc_test IS
+
+BEGIN
+
+	PROCESS(i)
+		VARIABLE i1 : INTEGER;
+	BEGIN
+		lab1: NULL;
+			  i1 := 1;
+			  o1 <= not i after 1.5ns;
+			  o2 <= i after 1.5ns;
+		lab2: REPORT "This is a test" SEVERITY NOTE;
+	END PROCESS;
+
+END; 

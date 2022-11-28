@@ -1,0 +1,22 @@
+ENTITY AND4B IS
+
+GENERIC(
+			inWidth : integer := 4;
+			outWidth : integer
+);
+
+PORT( 
+		   i         : in    bit_vector(0 to outWidth-1);
+		   o         : out   bit
+);
+
+END AND4B;
+
+ARCHITECTURE behave OF AND4B IS
+	-- signal sig1 : bit_vector(0 to outwidth-1);
+
+BEGIN
+
+	o <= i(0) and i(1) and i(2) and i(3) after 500PS;
+
+END; 

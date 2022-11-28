@@ -1,0 +1,32 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity reg_file is
+
+  port (
+       addr1, addr2   : in    std_logic_vector(2 downto 0);
+       reg_out_1, reg_out_2   : out    std_logic_vector(31 downto 0)
+       );
+
+end reg_file;
+
+architecture behavioral of reg_file is
+  signal reg0, reg2, reg4, reg6: std_logic_vector(31 downto 0) := to_stdlogicvector(x"12345678");
+  signal reg1, reg3, reg5, reg7: std_logic_vector(31 downto 0) := to_stdlogicvector(x"abcdef00");
+begin
+  
+  with addr1 select
+  		reg_out_1 <= reg0 after 1ns when "000",
+			  		reg1 after 1ns when "001",
+			  		reg2 after 1ns when "010",
+			  		reg3 after 1ns when "011",
+			  		reg3 after 1ns when others;
+
+  with addr2 select
+  		reg_out_2 <= reg4 after 1ns when "100",
+			  		reg5 after 1ns when "101",
+			  		reg6 after 1ns when "110",
+			  		reg7 after 1ns when "111",
+			  		reg7 after 1ns when others;
+
+end behavioral;

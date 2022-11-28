@@ -1,0 +1,27 @@
+
+entity NAND_GATE is 
+ generic(N : natural);
+ port(
+		A	: in	bit_vector(1 to N);
+		Z	: out	bit
+	);
+
+end NAND_GATE;
+
+
+architecture arch1 of NAND_GATE is
+
+begin
+
+  process(A)
+  	variable NAND_OUT : bit;
+  begin
+  	NAND_OUT := '1';
+  	for K in 1 to N loop
+  	  NAND_OUT := NAND_OUT and A(K);
+  	  exit when NAND_OUT = '0';
+  	end loop;
+  	Z <= not NAND_OUT;
+  end process;
+
+end arch1;

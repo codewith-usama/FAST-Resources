@@ -1,0 +1,33 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+library Libs;
+use Libs.VHDLPrims.all;
+
+
+entity FULL_ADDER is 
+
+ port(
+		c_in	: in	std_logic;
+		a	: in	std_logic;
+		b	: in	std_logic;
+		sum	: out	std_logic;
+		c_out	: out	std_logic
+	);
+
+end FULL_ADDER;
+
+
+architecture arch1 of FULL_ADDER is
+
+  signal s1, s2, s3 : std_logic;
+  
+begin
+
+  G1 : xor_3 port map(INA => c_in, INB => a, INC => b, Y => sum);
+  G2 : and_2 port map(INA => c_in, INB => a, Y => s1);
+  G3 : and_2 port map(INA => a, INB => b, Y => s2);
+  G4 : and_2 port map(INA => c_in, INB => b, Y => s3);
+  G5 : or_3  port map(INA => s1, INB => s2, INC => s3, Y => c_out);
+  
+
+end arch1;

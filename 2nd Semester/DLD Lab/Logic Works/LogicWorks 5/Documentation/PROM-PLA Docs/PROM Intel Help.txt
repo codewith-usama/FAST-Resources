@@ -1,0 +1,34 @@
+Intel Hex Format Help
+
+The file will contain one byte per PROM address if 8 or less output bits were specified, two bytes per PROM address if 9 to 16 output bits were specified, etc. The number of addresses in the file will be 2 N , where N is the number of input bits. Each line must start with a colon ":", followed by:
+
+- 2 hex digits (1 byte) indicating the number of actual data bytes on this line.
+- 4 hex digits (2 bytes) indicating the starting address for the data bytes on this line.
+- 2 hex digits which will be "00" in all records except for an empty terminator record, in which they will be "01".
+- groups of 2 digits for the number of data bytes indicated at the beginning of the line.
+- 2 hex digits for an 8-bit checksum of all the hex data on the line. The 8-bit sum of all hex data pairs (including count, address, type, data and checksum) will be zero.
+
+The file is terminated by a hex line with a byte count of zero, address of zero and type of "01".
+
+NOTE: The hex file does not need to specify data for every address in the PROM. If there are any gaps in the data then Don’t Know will be assumed for unspecified locations.
+
+PROM Data File Example
+
+Example 1 - 4-input, 4-output PROM
+
+:100000000304040204020204040202040204040AB7
+:00000001
+
+Example 2 - 8-input, 8-output PROM
+
+(Note - in case you are viewing this sample in a text editor that is wrapping lines, every line in the file starts with a ":".  Any other line breaks that you see are being added by the text editor and must not appear in the file.)
+
+:200000000F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F00
+:20002000060F0E0D0C0B0A0908070F0F0F0F0F0F0E0D0C0B0A090807060F0F0F0F0F0F0F3A
+:200040000F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0FC0
+:20006000060F0E0D0C0B0A0908070F0F0F0F0F0F0E0D0C0B0A090807060F0F0F0F0F0F0FFA
+:200080000F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F80
+:2000A000060F0E0D0C0B0A0908070F0F0F0F0F0F0E0D0C0B0A090807060F0F0F0F0F0F0FBA
+:2000C0000F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F40
+:2000E000060F0E0D0C0B0A0908070F0F0F0F0F0F0E0D0C0B0A090807060F0F0F0F0F0F0F7A
+:00000001FF

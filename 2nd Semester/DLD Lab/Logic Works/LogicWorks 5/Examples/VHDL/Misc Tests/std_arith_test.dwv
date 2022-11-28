@@ -1,0 +1,28 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.std_logic_arith.all;
+library LogicWorks;
+use LogicWorks.debug.all;
+
+entity arith_machine is
+	port(i1, i2 : std_logic_vector(7 downto 0);
+		dosigned : std_logic;
+		plus : out std_logic_vector(7 downto 0);
+		minus : out std_logic_vector(7 downto 0);
+		mult : out std_logic_vector(15 downto 0));
+end arith_machine;
+
+
+
+architecture a1 of arith_machine is	
+
+begin
+
+	plus <= signed(i1) + signed(i2);
+	minus <= signed(i1) - signed(i2);
+	
+	with dosigned select
+		mult <= unsigned(i1) * unsigned(i2) when '0',
+				signed(i1) * signed(i2) when '1';
+	
+end a1;
