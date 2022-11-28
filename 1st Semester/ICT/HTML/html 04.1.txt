@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+div{
+width: 250px;
+height: 250px;
+}
+</style>
+</head>
+
+<body>
+<a href="https://translate.google.com.pk/";> 
+<img src="screenshot.png"; alt="png.fie";
+style="float:left;"
+</a>
+<a href="file:///C:/Users/AA/Desktop/HTML/html%2002.html";> 
+<img src="abcd.gif"; alt="png.fie";
+width=100px; height100px; style="float:left;">
+</a>
+
+</body>
+</html>

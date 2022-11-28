@@ -1,0 +1,10 @@
+1: Employee ID -> 123  Name -> Mohammad Usama  Salary -> 40000  Age -> 35  Department -> X  Deprt ID -> 1
+
+2: Employee ID -> 124  Name -> Mohsin Shah  Salary -> 35000  Age -> 40  Department -> Y  Deprt ID -> 2
+
+3: Employee ID -> 125  Name -> Rahib Hussain  Salary -> 100000  Age -> 50  Department -> Y  Deprt ID -> 3
+
+4: Employee ID -> 126  Name -> Ahmed Khan  Salary -> 80000  Age -> 65  Department -> X  Deprt ID -> 4
+
+5: Employee ID -> 127  Name -> Arham Khan  Salary -> 90000  Age -> 55  Department -> X  Deprt ID -> 5
+

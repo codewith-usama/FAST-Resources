@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<body style="background-color:powderblue;">
+<head>
+<form>
+<style>
+    h2
+{
+   color: blue;
+   font-family: strong;
+   font-size: 120%;
+   text-align: center;
+}
+div
+{ text-align: center;
+ background-image:url('pic.jpg');
+ background-size: 100% 100%;
+}
+</style>
+<form>
+
+<div>
+  <h1>SINGUP ACCOUNT:</h1>
+  <h2>BIO DATA:</h2>
+<label for="fname">First Name :</label>
+<input type="text" id="name" name="name" value="" required size="30"><br><br>
+        <label for="lname">Last Name:</label>
+        <input type="text" id="name" name="name" size="30" value=""required ><br><br>
+<label for="pass">Password:</label>
+<input type="Password" id="pass" name="password" value="" required size="8"><br><br>
+<label for="email">Email:</label>
+<input type="email" id="email" name="email" value="" required size="30"><br><br>
+        <label for="date">Enter Date Of Birth:</label>
+        <input type="date" id="date" name="date" date="01-01-1900"><br><br>
+<label for="gender">Gender:</label>
+<input type="radio" id="male" name="gender" value="male">
+<label for="male">Male</label>
+<input type="radio" id="female" name="gender" value="female">
+<label for="female">Female</label><br><br>
+<label for="phone">Contact Number:</label>
+<input type="tel" id="phone" name="phone" required placeholder="1234-1231231"      pattern="[0-9]{4}-[0-9]{7}"><br><br>
+ <h2>Educational Information:</h2>
+    <label for="degree">Degree:</label>
+    <select name="degree" id="degree">
+    <option >--group--</option>
+    <option value="degree1">Bachelors</option>
+    <option value="degree2">Masters</option>
+    <option value="degree3">PHD</option>
+    <option value="degree4">MPHIL</option>
+    </select><br><br>
+    <label for="field">Field:</label>
+    <select name="field" id="field">
+    <option >--Select Group--</option>
+    <option value="field1">Engineering</option>
+    <option value="field3">Medical</option>
+    <option value="field2">IT</option>
+    <option value="field4">General Physician</option>
+    </select><br><br>
+ <h2>Extracurricular Activites:</h2>
+    <label for="hobbies">Hobbies:</label>
+    <input type="checkbox" id="hobbies1" name="hobbies1" value="Squash">
+    <label for="activity1">Squash</label>
+    <input type="checkbox" id="hobbies2" name="hobbies2" value="Table Tennis">
+    <label for="activity2">Table Tennis</label>
+    <input type="checkbox" id="hobbies3" name="hobbies3" value="Badminton">
+    <label for="activity3">Badminton</label>
+    <input type="checkbox" id="hobbies4" name="hobbies4" value="Debating">
+    <label for="activity4">Debating</label>
+ <h2>Address:</h2>
+    <input type="text" id="Address" name=" Current Address" value="" size="70" style="height:55px"><br><br>
+    <label for="Resume">Attach file</label><br>
+    <input type="file" id="Resume" name="Resume"><br><br>
+    <input type="image" src="submit.jpg" alt="Usama" width="130" height="130">  
+   </div>
+   </form>
+  </body>
+  </html>

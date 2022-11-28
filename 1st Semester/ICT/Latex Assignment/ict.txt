@@ -1,0 +1,133 @@
+\documentclass[12pt, two sided]{report}
+\usepackage[utf8]{inputenc}
+
+\title{ICT Assignment}
+\author{Mohammad Usama \thanks{By M.Usama}}
+\date{January 2021}
+
+\usepackage{graphicx}
+
+\begin{document}
+\tableofcontents
+\maketitle
+\chapter{Computer}
+\section{Introduction}
+
+A computer is an electronic device, operating under the control of instructions stored
+in its own memory that can accept data (input), process the data according to specified
+rules, produce information (output), and store the information for future use. Software is actually a computer program. To be more specific, a program is a set of step-by-step instructions that directs the computer to do the tasks you want it to do and to produce the results you want. A computer programmer is a person who writes programs. Most of us do not write programs, we use programs written by someone else. This means we are users - people who purchase and use computer software.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25 \textwidth]{pic.jpg}
+    \caption{Computer}
+    \label{fig:pic}
+\end{figure}
+
+\newpage
+
+\section{History}
+The computer as we know it today had its beginning with a 19th century English mathematics professor name Charles Babbage.
+He designed the Analytical Engine and it was this design that the basic framework of the computers of today are based on. It was called the Atanasoff-Berry Computer (ABC). In 1943 an electronic computer name the Colossus was built for the military. Other developments continued until in 1946 the first general– purpose digital computer, the Electronic Numerical Integrator and Computer (ENIAC) was built. It is said that this computer weighed 30 tons, and had 18,000 vacuum tubes which was used for processing. When this computer was turned on for the first time lights dim in sections of Philadelphia. Computers of this generation could only perform single task, and they had no operating system.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.30 \textwidth]{pic1.png}
+    \caption{First Computer}
+    \label{fig:pic1}
+\end{figure}
+
+\section{Genretions}
+There are five computer generations known till date. Each generation has been discussed in detail along with their time period and characteristics. In the following table, approximate dates against each generation has been mentioned, which are normally accepted.\\
+
+\textbf{Following are the main five generations of computers.}
+
+\begin{enumerate}
+    \item The period of first generation: \textbf{\textit{1946-1959}}. \underline{Vacuum tube based.}
+    
+    \item The period of second generation: \textbf{\textit{1959-1965}}. \underline{Transistor based.}
+    
+    \item The period of third generation: \textbf{\textit{1965-1971}}.\underline{ Integrated Circuit based.}
+    
+    \item The period of fourth generation: \textbf{\textit{1971-1980}}. \underline{VLSI microprocessor based}
+    
+    \item The period of fifth generation: \textbf{\textit{1980-onwards}}. \underline{ULSI microprocessor based.}
+    
+\end{enumerate}
+
+\section{Networking}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.40 \textwidth]{network.jpg}
+    \caption{Networking}
+    \label{fig:pic2}
+\end{figure}
+
+Above figure \ref{fig:pic2} is a  computer networking is a process of connecting two more than two computers with the purpose to share data, provide technical support, and to communicate (\textit{especially for the business purpose.})
+
+Internet is the technology that is used to connect different computer systems (\textit{located in different geographic location}). Networking technology has revolutionized the world and created a new arena for the overall development of every nation.
+
+\subsection{Advantages of Networking}
+
+\begin{itemize}
+    \item Facility of Technical Support
+    \item Easy Sharing of Data
+    \item Easy Sharing of Hardware Resource
+    \item Easy Sharing Software
+    \item Easy to Decentralize Data Processing
+    \item Easy to Communicate
+\end{itemize}
+
+\subsection{Types of Network}
+
+\begin{enumerate}
+    \item Local Area Network (LAN)
+    \item Metropolitan Area Network (MAN)
+    \item Wide Area Network (WAN)
+\end{enumerate}
+
+\section{Computer Specifications}
+
+\begin{center}
+    \begin{tabular}{|c|c|c|c|c|}
+         \hline \hline
+         \textbf{Type} & \textbf{Processor} & \textbf{RAM} & \textbf{ROM} & \textbf{Window}\\
+         \hline \hline
+         Intel Core i5 & 3.0GHz & 8GB & 1TB & Windows 10 Pro\\
+         \hline
+         Intel Core i7 & 3.0GHz & 8GB & 256GB & Windows 10 Pro\\
+         \hline
+         Itel Core i5 & 3.0GHz & 8GB & 1TB & DOS\\
+         \hline
+         Itel Core i3 & 3.6GHz & 4GB & 1TB & DOS\\
+         \hline
+         Itel Core i5 & 4GHz & 8GB & 1TB & Windows 8\\
+         \hline
+    
+
+    \end{tabular}
+\end{center}
+
+
+\section{Computer In Today's World}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.50 \linewidth]{computer.png}
+    \caption{Today's Computer}
+    \label{fig:pic3}
+\end{figure}
+
+
+Above is pic figure \ref{fig:pic3} of today's world computers which are very useful because there is weather forcasting and many other things. People can forcast weather by this process by computers . Advertising is one of the most progressive field these days . Computer animation is the art of creating moving images by this use of computers . We can use use internation network (internet) to check mail, play games, find other's addresses , etc. Scientists also use computers for their experiments . There are some documents to type. For example MS Word , MS Exel , etc . We can do our school project also by using computers. There is one thing which is very conveinient for us it is that we can talk or chat with people who are in another country by using google talk , yahoo messenger , etc.
+
+
+\end{document}
+
+
+
+
+
+
+
