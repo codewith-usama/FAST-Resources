@@ -1,0 +1,30 @@
+Example Query: cricket politics
+Result-Set: 5, 26, 29, 24, 14 
+
+Example Query: Dharamsala to Indore 
+Result-Set: 17  
+
+Example Query: retirement
+Result-Set: 14, 6
+
+Example Query: test captain
+Result-Set: 17, 3, 6, 21, 23, 9, 14, 22, 7
+
+Example Query: pcb psl
+Result-Set: 11, 29
+
+Example Query: hate 
+Result-Set: 
+
+Example Query: bowling coach
+Result-Set: 29, 24, 6, 27, 25, 4
+
+Example Query: relative comfort 
+Result-Set: 11, 19, 2, 7
+
+Example Query:possible 
+Result-Set: 23, 15
+
+Example Query:batter bowler 
+Result-Set: 3, 15, 2, 16, 9
+
