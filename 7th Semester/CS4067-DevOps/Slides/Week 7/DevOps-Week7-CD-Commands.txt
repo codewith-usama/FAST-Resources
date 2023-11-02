@@ -1,0 +1,15 @@
+REGION='southeastasia'
+RESOURCEGROUPNAME='DevOpsClass-RG'
+az group create -n $RESOURCEGROUPNAME -l $REGION
+
+
+SERVICEPLANNAME='DevOpsClass-SP1'
+az appservice plan create -g $RESOURCEGROUPNAME -n $SERVICEPLANNAME --sku S1
+
+SUFFIX=$RANDOM$RANDOM
+az webapp create -g $RESOURCEGROUPNAME -p $SERVICEPLANNAME -n RGATES$SUFFIX-Canary
+
+az appservice plan create -g $RESOURCEGROUPNAME -n $SERVICEPLANNAME --sku S1
+
+--
+az webapp create -g $RESOURCEGROUPNAME -p $SERVICEPLANNAME -n RGATES$SUFFIX-Prod

@@ -1,0 +1,6 @@
+Verify:
+
+az deployment group what-if --name az13l01deployment --resource-group DevOpsFall2023 --template-file main.bicep
+
+Create:
+az deployment group create --name az13l01deployment --resource-group DevOpsFall2023 --template-file main.bicep
