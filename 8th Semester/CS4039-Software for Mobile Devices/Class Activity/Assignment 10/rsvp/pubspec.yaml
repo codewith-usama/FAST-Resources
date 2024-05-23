@@ -1,0 +1,29 @@
+name: rsvp
+description: "A new Flutter project."
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+dependencies:
+  cloud_firestore: ^4.17.3
+  firebase_auth: ^4.19.5
+  firebase_core: ^2.31.0
+  firebase_ui_auth: ^1.14.0
+  flutter:
+    sdk: flutter
+  go_router: ^14.1.2
+  google_fonts: ^6.2.1
+  provider: ^6.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/
